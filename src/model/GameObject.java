@@ -15,7 +15,7 @@ public abstract class GameObject {
 
     private double gravityAcc;
 
-    private boolean falling, jumping;
+    private boolean falling, jumpingUp, jumpingDown, standing;
 
     public GameObject(double x, double y, BufferedImage style){
         setLocation(x, y);
@@ -28,7 +28,8 @@ public abstract class GameObject {
         setVelX(0);
         setVelY(0);
         setGravityAcc(0.38);
-        jumping = false;
+        jumpingUp = false;
+        jumpingDown = false;
         falling = true;
     }
 
@@ -42,7 +43,6 @@ public abstract class GameObject {
         //for debugging
         /*Graphics2D g2 = (Graphics2D)g;
         g2.setColor(Color.WHITE);
-
         g2.draw(getTopBounds());
         g2.draw(getBottomBounds());
         g2.draw(getRightBounds());
@@ -50,17 +50,22 @@ public abstract class GameObject {
     }
 
     public void updateLocation() {
-        if(jumping && velY <= 0){
-            jumping = false;
-            falling = true;
-        }
-        else if(jumping){
+        if((jumpingUp || jumpingDown) && velY == 0){
+            jumpingUp = false;
+            jumpingDown = false;
+            standing = true;
+       }
+       else if(jumpingUp){
             velY = velY - gravityAcc;
             y = y - velY;
-        }
+       }
+       else if(jumpingDown) {
+           velY = velY + gravityAcc;
+           y = y + velY;
+       }
 
-        if(falling){
-            y = y + velY;
+        if(standing){
+            y = y + 0;
             velY = velY + gravityAcc;
         }
 
@@ -158,12 +163,19 @@ public abstract class GameObject {
         this.falling = falling;
     }
 
-    public boolean isJumping() {
-        return jumping;
+    public void setStanding(boolean standing) {
+        this.standing = standing;
     }
 
-    public void setJumping(boolean jumping) {
-        this.jumping = jumping;
+    public boolean isJumping() {
+        return jumpingUp&&jumpingDown;
+    }
+
+    public void setJumpingUp(boolean jumpingUp) {
+        this.jumpingUp = jumpingUp;
+    }
+
+    public void setJumpingDown(boolean jumpingDown) {
+        this.jumpingDown = jumpingDown;
     }
 }
-

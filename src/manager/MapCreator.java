@@ -103,7 +103,7 @@ class MapCreator {
                     createdMap.addEnemy(enemy);
                 }
                 else if (currentPixel == mario) {
-                    Mario marioObject = new Mario(xLocation, yLocation);
+                    Mario marioObject = new Mario(xLocation, yLocation);//y+347
                     createdMap.setMario(marioObject);
                 }
                 else if(currentPixel == end){

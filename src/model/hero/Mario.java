@@ -17,6 +17,7 @@ public class Mario extends GameObject{
     private double invincibilityTimer;
     private MarioForm marioForm;
     private boolean toRight = true;
+    private boolean toUp = true;
 
     public Mario(double x, double y){
         super(x, y, null);
@@ -46,13 +47,36 @@ public class Mario extends GameObject{
         super.draw(g);
     }
 
-    public void jump(GameEngine engine) {
-        if(!isJumping() && !isFalling()){
-            setJumping(true);
-            setVelY(10);
+    public void jump(GameEngine engine, boolean toUp) {
+        //if(!isJumping() && !isFalling()){
+            if(toUp) {
+                setJumpingUp(true);
+                setVelY(5);
+            }
+            else {
+                setJumpingDown(true);
+                setVelY(-5);
+            }
             engine.playJump();
-        }
+        //}
     }
+
+  /*  public void moveVertically(boolean toUp) {
+        if(!isGoingDown() && !isGoingUp()) {
+            if (toUp) {
+                setGoingUp(true);
+                setGoingDown(false);
+                setStanding(false);
+                setVelY(10);
+            } else {
+                setGoingDown(true);
+                setGoingUp(false);
+                setStanding(false);
+                setVelY(10);
+            }
+            this.toUp = toUp;
+        }
+    }*/
 
     public void move(boolean toRight, Camera camera) {
         if(toRight){
@@ -124,11 +148,19 @@ public class Mario extends GameObject{
         return toRight;
     }
 
+    public boolean getToUp() {
+        return toUp;
+    }
+
     public void resetLocation() {
         setVelX(0);
         setVelY(0);
         setX(50);
-        setJumping(false);
-        setFalling(true);
+        setJumpingUp(false);
+        setJumpingDown(false);
+        setStanding(true);
+        //setGoingUp(false);
+        //setGoingDown(false);
+        //setStanding(true);
     }
 }

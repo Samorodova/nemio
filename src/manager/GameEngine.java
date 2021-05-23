@@ -197,8 +197,15 @@ public class GameEngine implements Runnable {
             }
         } else if (gameStatus == GameStatus.RUNNING) {
             Mario mario = mapManager.getMario();
-            if (input == ButtonAction.JUMP) {
-                mario.jump(this);
+           // if (input == ButtonAction.JUMP) {
+             //   mario.jump(this);
+               // mario.moveVertically(true,camera);
+            if (input == ButtonAction.GO_UP) {
+                //mario.moveVertically(true);
+                mario.jump(this,true);
+            }else if (input == ButtonAction.GO_DOWN) {
+              //  mario.moveVertically(false);
+                mario.jump(this,false);
             } else if (input == ButtonAction.M_RIGHT) {
                 mario.move(true, camera);
             } else if (input == ButtonAction.M_LEFT) {
