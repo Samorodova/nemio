@@ -52,7 +52,7 @@ public abstract class GameObject {
     public void updateLocation() {
         if((jumpingUp || jumpingDown) && velY <= 0) {
             jumpingUp = false;
-            jumpingDown = true;
+            jumpingDown = false;
             velY *= -1;
         }
        else if(jumpingUp){
@@ -60,7 +60,7 @@ public abstract class GameObject {
             y = y - velY;
        }
        else if(jumpingDown) {
-           velY = velY + gravityAcc;
+           velY = velY - gravityAcc;
            y = y + velY;
        }
 
