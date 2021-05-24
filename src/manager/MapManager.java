@@ -138,7 +138,9 @@ public class MapManager {
 
         if (mario.getY() + mario.getDimension().height >= map.getBottomBorder()) {
             mario.setY(map.getBottomBorder() - mario.getDimension().height);
-            mario.setFalling(false);
+           // mario.setFalling(false);
+            mario.setJumpingDown(false);
+            mario.setJumpingUp(false);
             mario.setVelY(0);
         }
 
@@ -159,6 +161,13 @@ public class MapManager {
                 if(prize != null)
                     map.addRevealedPrize(prize);
             }
+        }
+
+        if (mario.getY() <= map.getTopBorder()) {
+              mario.setY(0);
+              mario.setJumpingUp(false);
+              mario.setJumpingDown(false);
+              mario.setVelY(0);
         }
     }
 

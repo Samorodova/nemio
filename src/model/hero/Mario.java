@@ -48,35 +48,16 @@ public class Mario extends GameObject{
     }
 
     public void jump(GameEngine engine, boolean toUp) {
-        //if(!isJumping() && !isFalling()){
             if(toUp) {
                 setJumpingUp(true);
-                setVelY(5);
+                setVelY(10);
             }
             else {
                 setJumpingDown(true);
-                setVelY(-5);
+                setVelY(10);
             }
             engine.playJump();
-        //}
     }
-
-  /*  public void moveVertically(boolean toUp) {
-        if(!isGoingDown() && !isGoingUp()) {
-            if (toUp) {
-                setGoingUp(true);
-                setGoingDown(false);
-                setStanding(false);
-                setVelY(10);
-            } else {
-                setGoingDown(true);
-                setGoingUp(false);
-                setStanding(false);
-                setVelY(10);
-            }
-            this.toUp = toUp;
-        }
-    }*/
 
     public void move(boolean toRight, Camera camera) {
         if(toRight){
@@ -159,8 +140,5 @@ public class Mario extends GameObject{
         setJumpingUp(false);
         setJumpingDown(false);
         setStanding(true);
-        //setGoingUp(false);
-        //setGoingDown(false);
-        //setStanding(true);
     }
 }
