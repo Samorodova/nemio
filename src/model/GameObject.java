@@ -67,6 +67,11 @@ public abstract class GameObject {
         x = x + velX;
     }
 
+    public void updateEnemiesLocation() {
+        y = y - velY;
+        x = x + velX;
+    }
+
     public void setLocation(double x, double y) {
         setX(x);
         setY(y);

@@ -61,7 +61,7 @@ public class Mario extends GameObject{
 
     public void move(boolean toRight, Camera camera) {
         if(toRight){
-            setVelX(5);
+            setVelX(5); //next level - increase speed
         }
         else if(camera.getX() < getX()){
             setVelX(-5);

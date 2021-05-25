@@ -10,6 +10,7 @@ import model.hero.Mario;
 import model.prize.BoostItem;
 import model.prize.Coin;
 import model.prize.Prize;
+import org.w3c.dom.css.Rect;
 import view.ImageLoader;
 
 import java.awt.*;
@@ -227,6 +228,9 @@ public class MapManager {
                 Rectangle enemyBottomBounds = enemy.getBottomBounds();
                 Rectangle brickTopBounds = brick.getTopBounds();
 
+                Rectangle enemyTopBounds = enemy.getTopBounds();
+                Rectangle brickBottomBounds = brick.getBottomBounds();
+
                 if (enemy.getVelX() > 0) {
                     enemyBounds = enemy.getRightBounds();
                     brickBounds = brick.getLeftBounds();
@@ -237,17 +241,31 @@ public class MapManager {
                 }
 
                 if (enemyBottomBounds.intersects(brickTopBounds)){
-                    enemy.setFalling(false);
-                    enemy.setVelY(0);
-                    enemy.setY(brick.getY()-enemy.getDimension().height);
+                  //  enemy.setFalling(false);
+                    enemy.setJumpingUp(true);
+                    enemy.setVelY(-enemy.getVelY());
+                    enemy.setY(brick.getY() - enemy.getDimension().height);
                     standsOnBrick = true;
+                }
+
+                if(enemyTopBounds.intersects(brickBottomBounds)) {
+                    enemy.setJumpingDown(true);
+                    enemy.setVelY((-enemy.getVelY()));
+                    enemy.setY(brick.getY() + brick.getDimension().height);
                 }
             }
 
             if(enemy.getY() + enemy.getDimension().height > map.getBottomBorder()){
-                enemy.setFalling(false);
-                enemy.setVelY(0);
+               // enemy.setFalling(false);
+                enemy.setJumpingUp(true);
+                enemy.setVelY(-enemy.getVelY());
                 enemy.setY(map.getBottomBorder()-enemy.getDimension().height);
+            }
+
+            if(enemy.getY() < map.getTopBorder()) {
+                enemy.setJumpingDown(true);
+                enemy.setVelY(-enemy.getVelY());
+                enemy.setY(map.getTopBorder());
             }
 
             if (!standsOnBrick && enemy.getY() < map.getBottomBorder()){

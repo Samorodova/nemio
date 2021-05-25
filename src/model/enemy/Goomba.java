@@ -9,12 +9,14 @@ public class Goomba extends Enemy{
 
     public Goomba(double x, double y, BufferedImage style) {
         super(x, y, style);
-        setVelX(3);
+        setVelX(0);
+        setVelY(3);
+        setJumpingUp(true);
     }
 
     @Override
     public void draw(Graphics g){
-        if(getVelX() > 0){
+        if(getVelX() > 0 && getVelY() > 0){
             g.drawImage(rightImage, (int)getX(), (int)getY(), null);
         }
         else

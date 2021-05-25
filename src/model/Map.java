@@ -134,7 +134,7 @@ public class Map {
     public void updateLocations() {
         mario.updateLocation();
         for(Enemy enemy : enemies){
-            enemy.updateLocation();
+            enemy.updateEnemiesLocation();
         }
 
         for(Iterator<Prize> prizeIterator = revealedPrizes.iterator(); prizeIterator.hasNext();){
