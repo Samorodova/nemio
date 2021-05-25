@@ -28,6 +28,8 @@ public class Map {
     private BufferedImage backgroundImage;
     private double bottomBorder = 720 - 96;
     private double topBorder = 0;
+    private double leftBorder = 0;
+    private double rightBorder = 1268;
     private String path;
 
 
@@ -171,6 +173,8 @@ public class Map {
     }
 
     public double getTopBorder() { return topBorder; }
+
+    public double getLeftBorder() { return leftBorder; }
 
     public void addRevealedPrize(Prize prize) {
         revealedPrizes.add(prize);

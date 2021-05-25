@@ -268,6 +268,10 @@ public class MapManager {
                 enemy.setY(map.getTopBorder());
             }
 
+            if(enemy.getX() < map.getLeftBorder()) {
+                enemy.setVelX(-enemy.getVelX());
+            }
+
             if (!standsOnBrick && enemy.getY() < map.getBottomBorder()){
                 enemy.setFalling(true);
             }
