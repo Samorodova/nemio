@@ -14,7 +14,7 @@ public class MapSelection {
     }
 
     public void draw(Graphics g){
-        g.setColor(Color.BLACK);
+        g.setColor(new Color(174,220,243));
         g.fillRect(0,0, 1280, 720);
 
         if(mapSelectionItems == null){
@@ -24,7 +24,7 @@ public class MapSelection {
 
         String title = "Select a Map";
         int x_location = (1280 - g.getFontMetrics().stringWidth(title))/2;
-        g.setColor(Color.YELLOW);
+        g.setColor(new Color(194, 164, 243));
         g.drawString(title, x_location, 150);
 
         for(MapSelectionItem item : mapSelectionItems){

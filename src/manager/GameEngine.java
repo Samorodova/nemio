@@ -140,6 +140,8 @@ public class GameEngine implements Runnable {
 
         if (isGameOver()) {
             setGameStatus(GameStatus.GAME_OVER);
+            soundManager.pauseBackground();
+            playGameOver();
         }
 
         int missionPassed = passMission();
@@ -332,6 +334,8 @@ public class GameEngine implements Runnable {
     public void playStomp() {
         soundManager.playStomp();
     }
+
+    public void playGameOver() { soundManager.playGameOver(); }
 
     public MapManager getMapManager() {
         return mapManager;
