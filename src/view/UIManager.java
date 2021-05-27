@@ -2,6 +2,7 @@ package view;
 
 import manager.GameEngine;
 import manager.GameStatus;
+import model.GameObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +20,7 @@ public class UIManager extends JPanel{
     private BufferedImage coinIcon;
     private BufferedImage selectIcon;
     private MapSelection mapSelection;
+    private BufferedImage betweenLevelsScreen;
 
     public UIManager(GameEngine engine, int width, int height) {
         setPreferredSize(new Dimension(width, height));
@@ -38,6 +40,7 @@ public class UIManager extends JPanel{
         this.helpScreenImage = loader.loadImage("/HelpScreen.png");
         this.aboutScreenImage = loader.loadImage("/AboutScreen.png");
         this.gameOverScreen = loader.loadImage("/GameOver.png");
+        this.betweenLevelsScreen = loader.loadImage("/betweenLevelsScreen.png");
 
         try {
             InputStream in = getClass().getResourceAsStream("/media/font/SHOWG.ttf");
@@ -87,6 +90,9 @@ public class UIManager extends JPanel{
             else if(gameStatus == GameStatus.MISSION_PASSED){
                 drawVictoryScreen(g2);
             }
+            else if(gameStatus == GameStatus.MAP_PASSED) {
+                drawBetweenLevelsScreen(g2);
+            }
         }
 
         g2.dispose();
@@ -97,6 +103,10 @@ public class UIManager extends JPanel{
         g2.setColor(Color.WHITE);
         String displayedStr = "TIME: " + engine.getRemainingTime();
         g2.drawString(displayedStr, 750, 50);
+    }
+
+    public int getLastMap() {
+        return mapSelection.getLastMap();
     }
 
     private void drawVictoryScreen(Graphics2D g2) {
@@ -123,6 +133,10 @@ public class UIManager extends JPanel{
         int stringLength = g2.getFontMetrics().stringWidth(acquiredPoints);
         int stringHeight = g2.getFontMetrics().getHeight();
         g2.drawString(acquiredPoints, (getWidth()-stringLength)/2, getHeight()-stringHeight*2);
+    }
+
+    private void drawBetweenLevelsScreen(Graphics2D g2) {
+        g2.drawImage(betweenLevelsScreen, 0, 0, null);
     }
 
     private void drawPauseScreen(Graphics2D g2) {

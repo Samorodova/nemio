@@ -44,6 +44,13 @@ public class MapManager {
         return map != null;
     }
 
+    public boolean createNotFirstMap(ImageLoader loader, String path) {
+        MapCreator mapCreator = new MapCreator(loader);
+        map = mapCreator.createMap("/maps/" + path, 400, getRemainingLives(), getScore(), getCoins());
+
+        return map != null;
+    }
+
     public void acquirePoints(int point) {
         map.getMario().acquirePoints(point);
     }

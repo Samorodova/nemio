@@ -91,5 +91,9 @@ public class MapSelection {
                 return index + 1;
         }
     }
+
+    public int getLastMap() {
+        return mapSelectionItems.length;
+    }
 }
 

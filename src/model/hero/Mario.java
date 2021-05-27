@@ -37,6 +37,24 @@ public class Mario extends GameObject{
         setStyle(marioForm.getCurrentStyle(toRight, false, false));
     }
 
+    public Mario(double x, double y, int remainingLives, int points, int coins) {
+        super(x, y, null);
+        setDimension(48,48);
+
+        this.remainingLives = remainingLives;
+        this.points = points;
+        this.coins = coins;
+        invincibilityTimer = 0;
+
+        ImageLoader imageLoader = new ImageLoader();
+        BufferedImage[] leftFrames = imageLoader.getLeftFrames(MarioForm.SMALL);
+        BufferedImage[] rightFrames = imageLoader.getRightFrames(MarioForm.SMALL);
+
+        Animation animation = new Animation(leftFrames, rightFrames);
+        marioForm = new MarioForm(animation, false, false);
+        setStyle(marioForm.getCurrentStyle(toRight, false, false));
+    }
+
     @Override
     public void draw(Graphics g){
         boolean movingInX = (getVelX() != 0);

@@ -22,6 +22,7 @@ public class GameEngine implements Runnable {
     private Thread thread;
     private StartScreenSelection startScreenSelection = StartScreenSelection.START_GAME;
     private int selectedMap = 0;
+    private int activeMap = 1;
 
     private GameEngine() {
         init();
@@ -75,6 +76,13 @@ public class GameEngine implements Runnable {
         }
     }
 
+    public void selectSecondMap() {
+        String path = uiManager.selectMapViaKeyboard(1);
+        if (path != null) {
+            createMap(path);
+        }
+    }
+
     public void selectMapViaKeyboard(){
         String path = uiManager.selectMapViaKeyboard(selectedMap);
         if (path != null) {
@@ -88,6 +96,17 @@ public class GameEngine implements Runnable {
 
     private void createMap(String path) {
         boolean loaded = mapManager.createMap(imageLoader, path);
+        if(loaded){
+            setGameStatus(GameStatus.RUNNING);
+            soundManager.restartBackground();
+        }
+
+        else
+            setGameStatus(GameStatus.START_SCREEN);
+    }
+
+    private  void createNotFirstMap(String path) {
+        boolean loaded = mapManager.createNotFirstMap(imageLoader, path);
         if(loaded){
             setGameStatus(GameStatus.RUNNING);
             soundManager.restartBackground();
@@ -148,8 +167,29 @@ public class GameEngine implements Runnable {
         if(missionPassed > -1){
             mapManager.acquirePoints(missionPassed);
             //setGameStatus(GameStatus.MISSION_PASSED);
-        } else if(mapManager.endLevel())
-            setGameStatus(GameStatus.MISSION_PASSED);
+        } else if(mapManager.endLevel()) {
+           // setGameStatus(GameStatus.MISSION_PASSED);
+            setGameStatus(GameStatus.MAP_PASSED);
+            activeMap++;
+          //  resetCamera();
+            //createMap("Map 2.png");
+            resetMap();
+        }
+
+    }
+
+    private void resetMap() {
+        if(getGameStatus() == GameStatus.MAP_PASSED) {
+            if(getActiveMap() <= uiManager.getLastMap()) {
+                resetCamera();
+                //createMap("Map " + activeMap + ".png");
+                createNotFirstMap("Map " + activeMap + ".png");
+
+            }
+            else if(getActiveMap() > uiManager.getLastMap()) {
+                setGameStatus(GameStatus.MISSION_PASSED);
+            }
+        }
     }
 
     private void updateCamera() {
@@ -289,6 +329,10 @@ public class GameEngine implements Runnable {
 
     public int getSelectedMap() {
         return selectedMap;
+    }
+
+    public int getActiveMap() {
+        return activeMap;
     }
 
     public void drawMap(Graphics2D g2) {
