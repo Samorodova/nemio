@@ -74,7 +74,7 @@ public class Mario extends GameObject{
                 setJumpingDown(true);
                 setVelY(5);
             }
-            engine.playJump();
+            //engine.playJump();
     }
 
     public void move(boolean toRight, Camera camera) {
