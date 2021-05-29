@@ -84,7 +84,6 @@ public class Mario extends GameObject{
         else if(camera.getX() < getX()){
             setVelX(-5);
         }
-
         this.toRight = toRight;
     }
 

@@ -63,7 +63,8 @@ public class ImageLoader {
         }
 
         for(int i = 0; i < 5; i++){
-            leftFrames[i] = marioForms.getSubimage((col-1)*width, (i)*height, width, height);
+            //leftFrames[i] = marioForms.getSubimage((col-1)*width, (i)*height, width, height);
+            leftFrames[i] = loadImage("/clown-fishL.png");
         }
         return leftFrames;
     }
@@ -85,7 +86,8 @@ public class ImageLoader {
         }
 
         for(int i = 0; i < 5; i++){
-            rightFrames[i] = marioForms.getSubimage((col-1)*width, (i)*height, width, height);
+            // rightFrames[i] = marioForms.getSubimage((col-1)*width, (i)*height, width, height);
+            rightFrames[i] = loadImage("/clown-fish.png");
         }
         return rightFrames;
     }
