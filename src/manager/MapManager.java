@@ -6,11 +6,10 @@ import model.brick.Brick;
 import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
 import model.hero.Fireball;
-import model.hero.Mario;
+import model.hero.Nemio;
 import model.prize.BoostItem;
 import model.prize.Coin;
 import model.prize.Prize;
-import org.w3c.dom.css.Rect;
 import view.ImageLoader;
 
 import java.awt.*;
@@ -30,11 +29,11 @@ public class MapManager {
     }
 
     public void resetCurrentMap(GameEngine engine) {
-        Mario mario = getMario();
-        mario.resetLocation();
+        Nemio nemio = getNemio();
+        nemio.resetLocation();
         engine.resetCamera();
         createMap(engine.getImageLoader(), map.getPath());
-        map.setMario(mario);
+        map.setNemio(nemio);
     }
 
     public boolean createMap(ImageLoader loader, String path) {
@@ -52,15 +51,15 @@ public class MapManager {
     }
 
     public void acquirePoints(int point) {
-        map.getMario().acquirePoints(point);
+        map.getNemio().acquirePoints(point);
     }
 
-    public Mario getMario() {
-        return map.getMario();
+    public Nemio getNemio() {
+        return map.getNemio();
     }
 
     public void fire(GameEngine engine) {
-        Fireball fireball = getMario().fire();
+        Fireball fireball = getNemio().fire();
         if (fireball != null) {
             map.addFireball(fireball);
             engine.playFireball();
@@ -68,19 +67,19 @@ public class MapManager {
     }
 
     public boolean isGameOver() {
-        return getMario().getRemainingLives() == 0 || map.isTimeOver();
+        return getNemio().getRemainingLives() == 0 || map.isTimeOver();
     }
 
     public int getScore() {
-        return getMario().getPoints();
+        return getNemio().getPoints();
     }
 
     public int getRemainingLives() {
-        return getMario().getRemainingLives();
+        return getNemio().getRemainingLives();
     }
 
     public int getCoins() {
-        return getMario().getCoins();
+        return getNemio().getCoins();
     }
 
     public void drawMap(Graphics2D g2) {
@@ -88,9 +87,9 @@ public class MapManager {
     }
 
     public int passMission() {
-        if(getMario().getX() >= map.getEndPoint().getX() && !map.getEndPoint().isTouched()){
+        if(getNemio().getX() >= map.getEndPoint().getX() && !map.getEndPoint().isTouched()){
             map.getEndPoint().setTouched(true);
-            int height = (int)getMario().getY();
+            int height = (int)getNemio().getY();
             return height * 2;
         }
         else
@@ -98,7 +97,7 @@ public class MapManager {
     }
 
     public boolean endLevel(){
-        return getMario().getX() >= map.getEndPoint().getX() + 320;
+        return getNemio().getX() >= map.getEndPoint().getX() + 320;
     }
 
     public void checkCollisions(GameEngine engine) {
@@ -108,7 +107,7 @@ public class MapManager {
 
         checkBottomCollisions(engine);
         checkTopCollisions(engine);
-        checkMarioHorizontalCollision(engine);
+        checkNemioHorizontalCollision(engine);
         checkEnemyCollisions();
         checkPrizeCollision();
         checkPrizeContact(engine);
@@ -116,107 +115,107 @@ public class MapManager {
     }
 
     private void checkBottomCollisions(GameEngine engine) {
-        Mario mario = getMario();
+        Nemio nemio = getNemio();
         ArrayList<Brick> bricks = map.getAllBricks();
         ArrayList<Enemy> enemies = map.getEnemies();
         ArrayList<GameObject> toBeRemoved = new ArrayList<>();
 
-        Rectangle marioBottomBounds = mario.getBottomBounds();
+        Rectangle nemioBottomBounds = nemio.getBottomBounds();
 
-        if (!mario.isJumping())
-            mario.setFalling(true);
+        if (!nemio.isJumping())
+            nemio.setFalling(true);
 
         for (Brick brick : bricks) {
             Rectangle brickTopBounds = brick.getTopBounds();
-            if (marioBottomBounds.intersects(brickTopBounds)) {
-                mario.setY(brick.getY() - mario.getDimension().height + 1);
-                mario.setFalling(false);
-                mario.setVelY(0);
+            if (nemioBottomBounds.intersects(brickTopBounds)) {
+                nemio.setY(brick.getY() - nemio.getDimension().height + 1);
+                nemio.setFalling(false);
+                nemio.setVelY(0);
             }
         }
 
         for (Enemy enemy : enemies) {
             Rectangle enemyTopBounds = enemy.getTopBounds();
-            if (marioBottomBounds.intersects(enemyTopBounds)) {
-                mario.acquirePoints(100);
+            if (nemioBottomBounds.intersects(enemyTopBounds)) {
+                nemio.acquirePoints(100);
                 toBeRemoved.add(enemy);
                 engine.playStomp();
             }
         }
 
-        if (mario.getY() + mario.getDimension().height >= map.getBottomBorder()) {
-            mario.setY(map.getBottomBorder() - mario.getDimension().height);
-           // mario.setFalling(false);
-            mario.setJumpingDown(false);
-            mario.setJumpingUp(false);
-            mario.setVelY(0);
+        if (nemio.getY() + nemio.getDimension().height >= map.getBottomBorder()) {
+            nemio.setY(map.getBottomBorder() - nemio.getDimension().height);
+           // nemio.setFalling(false);
+            nemio.setJumpingDown(false);
+            nemio.setJumpingUp(false);
+            nemio.setVelY(0);
         }
 
         removeObjects(toBeRemoved);
     }
 
     private void checkTopCollisions(GameEngine engine) {
-        Mario mario = getMario();
+        Nemio nemio = getNemio();
         ArrayList<Brick> bricks = map.getAllBricks();
 
-        Rectangle marioTopBounds = mario.getTopBounds();
+        Rectangle nemioTopBounds = nemio.getTopBounds();
         for (Brick brick : bricks) {
             Rectangle brickBottomBounds = brick.getBottomBounds();
-            if (marioTopBounds.intersects(brickBottomBounds)) {
-                mario.setVelY(0);
-                mario.setY(brick.getY() + brick.getDimension().height);
+            if (nemioTopBounds.intersects(brickBottomBounds)) {
+                nemio.setVelY(0);
+                nemio.setY(brick.getY() + brick.getDimension().height);
                 Prize prize = brick.reveal(engine);
                 if(prize != null)
                     map.addRevealedPrize(prize);
             }
         }
 
-        if (mario.getY() <= map.getTopBorder()) {
-              mario.setY(0);
-              mario.setJumpingUp(false);
-              mario.setJumpingDown(false);
-              mario.setVelY(0);
+        if (nemio.getY() <= map.getTopBorder()) {
+              nemio.setY(0);
+              nemio.setJumpingUp(false);
+              nemio.setJumpingDown(false);
+              nemio.setVelY(0);
         }
     }
 
-    private void checkMarioHorizontalCollision(GameEngine engine){
-        Mario mario = getMario();
+    private void checkNemioHorizontalCollision(GameEngine engine){
+        Nemio nemio = getNemio();
         ArrayList<Brick> bricks = map.getAllBricks();
         ArrayList<Enemy> enemies = map.getEnemies();
         ArrayList<GameObject> toBeRemoved = new ArrayList<>();
 
-        boolean marioDies = false;
-        boolean toRight = mario.getToRight();
+        boolean nemioDies = false;
+        boolean toRight = nemio.getToRight();
 
-        Rectangle marioBounds = toRight ? mario.getRightBounds() : mario.getLeftBounds();
+        Rectangle nemioBounds = toRight ? nemio.getRightBounds() : nemio.getLeftBounds();
 
         for (Brick brick : bricks) {
             Rectangle brickBounds = !toRight ? brick.getRightBounds() : brick.getLeftBounds();
-            if (marioBounds.intersects(brickBounds)) {
-                mario.setVelX(0);
+            if (nemioBounds.intersects(brickBounds)) {
+                nemio.setVelX(0);
                 if(toRight)
-                    mario.setX(brick.getX() - mario.getDimension().width);
+                    nemio.setX(brick.getX() - nemio.getDimension().width);
                 else
-                    mario.setX(brick.getX() + brick.getDimension().width);
+                    nemio.setX(brick.getX() + brick.getDimension().width);
             }
         }
 
         for(Enemy enemy : enemies){
             Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
-            if (marioBounds.intersects(enemyBounds)) {
-                marioDies = mario.onTouchEnemy(engine);
+            if (nemioBounds.intersects(enemyBounds)) {
+                nemioDies = nemio.onTouchEnemy(engine);
                 toBeRemoved.add(enemy);
             }
         }
         removeObjects(toBeRemoved);
 
 
-        if (mario.getX() <= engine.getCameraLocation().getX() && mario.getVelX() < 0) {
-            mario.setVelX(0);
-            mario.setX(engine.getCameraLocation().getX());
+        if (nemio.getX() <= engine.getCameraLocation().getX() && nemio.getVelX() < 0) {
+            nemio.setVelX(0);
+            nemio.setX(engine.getCameraLocation().getX());
         }
 
-        if(marioDies) {
+        if(nemioDies) {
             resetCurrentMap(engine);
         }
     }
@@ -343,14 +342,14 @@ public class MapManager {
         ArrayList<Prize> prizes = map.getRevealedPrizes();
         ArrayList<GameObject> toBeRemoved = new ArrayList<>();
 
-        Rectangle marioBounds = getMario().getBounds();
+        Rectangle nemioBounds = getNemio().getBounds();
         for(Prize prize : prizes){
             Rectangle prizeBounds = prize.getBounds();
-            if (prizeBounds.intersects(marioBounds)) {
-                prize.onTouch(getMario(), engine);
+            if (prizeBounds.intersects(nemioBounds)) {
+                prize.onTouch(getNemio(), engine);
                 toBeRemoved.add((GameObject) prize);
             } else if(prize instanceof Coin){
-                prize.onTouch(getMario(), engine);
+                prize.onTouch(getNemio(), engine);
             }
         }
 

@@ -9,17 +9,17 @@ import view.ImageLoader;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Mario extends GameObject{
+public class Nemio extends GameObject{
 
     private int remainingLives;
     private int coins;
     private int points;
     private double invincibilityTimer;
-    private MarioForm marioForm;
+    private NemioForm nemioForm;
     private boolean toRight = true;
     private boolean toUp = true;
 
-    public Mario(double x, double y){
+    public Nemio(double x, double y){
         super(x, y, null);
         setDimension(48,48);
 
@@ -29,15 +29,15 @@ public class Mario extends GameObject{
         invincibilityTimer = 0;
 
         ImageLoader imageLoader = new ImageLoader();
-        BufferedImage[] leftFrames = imageLoader.getLeftFrames(MarioForm.SMALL);
-        BufferedImage[] rightFrames = imageLoader.getRightFrames(MarioForm.SMALL);
+        BufferedImage[] leftFrames = imageLoader.getLeftFrames(NemioForm.SMALL);
+        BufferedImage[] rightFrames = imageLoader.getRightFrames(NemioForm.SMALL);
 
         Animation animation = new Animation(leftFrames, rightFrames);
-        marioForm = new MarioForm(animation, false, false);
-        setStyle(marioForm.getCurrentStyle(toRight, false, false));
+        nemioForm = new NemioForm(animation, false, false);
+        setStyle(nemioForm.getCurrentStyle(toRight, false, false));
     }
 
-    public Mario(double x, double y, int remainingLives, int points, int coins) {
+    public Nemio(double x, double y, int remainingLives, int points, int coins) {
         super(x, y, null);
         setDimension(48,48);
 
@@ -47,12 +47,12 @@ public class Mario extends GameObject{
         invincibilityTimer = 0;
 
         ImageLoader imageLoader = new ImageLoader();
-        BufferedImage[] leftFrames = imageLoader.getLeftFrames(MarioForm.SMALL);
-        BufferedImage[] rightFrames = imageLoader.getRightFrames(MarioForm.SMALL);
+        BufferedImage[] leftFrames = imageLoader.getLeftFrames(NemioForm.SMALL);
+        BufferedImage[] rightFrames = imageLoader.getRightFrames(NemioForm.SMALL);
 
         Animation animation = new Animation(leftFrames, rightFrames);
-        marioForm = new MarioForm(animation, false, false);
-        setStyle(marioForm.getCurrentStyle(toRight, false, false));
+        nemioForm = new NemioForm(animation, false, false);
+        setStyle(nemioForm.getCurrentStyle(toRight, false, false));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Mario extends GameObject{
         boolean movingInX = (getVelX() != 0);
         boolean movingInY = (getVelY() != 0);
 
-        setStyle(marioForm.getCurrentStyle(toRight, movingInX, movingInY));
+        setStyle(nemioForm.getCurrentStyle(toRight, movingInX, movingInY));
 
         super.draw(g);
     }
@@ -89,21 +89,21 @@ public class Mario extends GameObject{
 
     public boolean onTouchEnemy(GameEngine engine){
 
-        if(!marioForm.isSuper() && !marioForm.isFire()){
+        if(!nemioForm.isSuper() && !nemioForm.isFire()){
             remainingLives--;
-            engine.playMarioDies();
+            engine.playNemioDies();
             return true;
         }
         else{
             engine.shakeCamera();
-            marioForm = marioForm.onTouchEnemy(engine.getImageLoader());
+            nemioForm = nemioForm.onTouchEnemy(engine.getImageLoader());
             setDimension(48, 48);
             return false;
         }
     }
 
     public Fireball fire(){
-        return marioForm.fire(toRight, getX(), getY());
+        return nemioForm.fire(toRight, getX(), getY());
     }
 
     public void acquireCoin() {
@@ -130,16 +130,16 @@ public class Mario extends GameObject{
         return coins;
     }
 
-    public MarioForm getMarioForm() {
-        return marioForm;
+    public NemioForm getNemioForm() {
+        return nemioForm;
     }
 
-    public void setMarioForm(MarioForm marioForm) {
-        this.marioForm = marioForm;
+    public void setNemioForm(NemioForm nemioForm) {
+        this.nemioForm = nemioForm;
     }
 
     public boolean isSuper() {
-        return marioForm.isSuper();
+        return nemioForm.isSuper();
     }
 
     public boolean getToRight() {

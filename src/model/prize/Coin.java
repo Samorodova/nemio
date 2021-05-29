@@ -2,7 +2,7 @@ package model.prize;
 
 import manager.GameEngine;
 import model.GameObject;
-import model.hero.Mario;
+import model.hero.Nemio;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -33,11 +33,11 @@ public class Coin extends GameObject implements Prize{
     }
 
     @Override
-    public void onTouch(Mario mario, GameEngine engine) {
+    public void onTouch(Nemio nemio, GameEngine engine) {
         if(!acquired){
             acquired = true;
-            mario.acquirePoints(point);
-            mario.acquireCoin();
+            nemio.acquirePoints(point);
+            nemio.acquireCoin();
             engine.playCoin();
         }
     }

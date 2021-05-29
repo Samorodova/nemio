@@ -1,8 +1,8 @@
 package model.prize;
 
 import manager.GameEngine;
-import model.hero.Mario;
-import model.hero.MarioForm;
+import model.hero.Nemio;
+import model.hero.NemioForm;
 import view.Animation;
 import view.ImageLoader;
 
@@ -16,19 +16,19 @@ public class FireFlower extends BoostItem {
     }
 
     @Override
-    public void onTouch(Mario mario, GameEngine engine) {
-        mario.acquirePoints(getPoint());
+    public void onTouch(Nemio nemio, GameEngine engine) {
+        nemio.acquirePoints(getPoint());
 
         ImageLoader imageLoader = new ImageLoader();
 
-        if(!mario.getMarioForm().isFire()){
-            BufferedImage[] leftFrames = imageLoader.getLeftFrames(MarioForm.FIRE);
-            BufferedImage[] rightFrames = imageLoader.getRightFrames(MarioForm.FIRE);
+        if(!nemio.getNemioForm().isFire()){
+            BufferedImage[] leftFrames = imageLoader.getLeftFrames(NemioForm.FIRE);
+            BufferedImage[] rightFrames = imageLoader.getRightFrames(NemioForm.FIRE);
 
             Animation animation = new Animation(leftFrames, rightFrames);
-            MarioForm newForm = new MarioForm(animation, true, true);
-            mario.setMarioForm(newForm);
-            mario.setDimension(48, 96);
+            NemioForm newForm = new NemioForm(animation, true, true);
+            nemio.setNemioForm(newForm);
+            nemio.setDimension(48, 96);
 
             engine.playFireFlower();
         }

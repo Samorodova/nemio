@@ -4,7 +4,7 @@ import model.brick.Brick;
 import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
 import model.hero.Fireball;
-import model.hero.Mario;
+import model.hero.Nemio;
 import model.prize.BoostItem;
 import model.prize.Coin;
 import model.prize.Prize;
@@ -17,7 +17,7 @@ import java.util.Iterator;
 public class Map {
 
     private double remainingTime;
-    private Mario mario;
+    private Nemio nemio;
     private ArrayList<Brick> bricks = new ArrayList<>();
     private ArrayList<Enemy> enemies = new ArrayList<>();
     private ArrayList<Brick> groundBricks = new ArrayList<>();
@@ -39,12 +39,12 @@ public class Map {
     }
 
 
-    public Mario getMario() {
-        return mario;
+    public Nemio getNemio() {
+        return nemio;
     }
 
-    public void setMario(Mario mario) {
-        this.mario = mario;
+    public void setNemio(Nemio nemio) {
+        this.nemio = nemio;
     }
 
     public ArrayList<Enemy> getEnemies() {
@@ -86,7 +86,7 @@ public class Map {
         drawBricks(g2);
         drawEnemies(g2);
         drawFireballs(g2);
-        drawMario(g2);
+        drawNemio(g2);
         endPoint.draw(g2);
     }
 
@@ -129,12 +129,12 @@ public class Map {
         }
     }
 
-    private void drawMario(Graphics2D g2) {
-        mario.draw(g2);
+    private void drawNemio(Graphics2D g2) {
+        nemio.draw(g2);
     }
 
     public void updateLocations() {
-        mario.updateLocation();
+        nemio.updateLocation();
         for(Enemy enemy : enemies){
             enemy.updateEnemiesLocation();
         }

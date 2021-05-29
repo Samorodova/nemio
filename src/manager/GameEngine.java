@@ -1,6 +1,6 @@
 package manager;
 
-import model.hero.Mario;
+import model.hero.Nemio;
 import view.ImageLoader;
 import view.StartScreenSelection;
 import view.UIManager;
@@ -37,7 +37,7 @@ public class GameEngine implements Runnable {
         soundManager = new SoundManager();
         mapManager = new MapManager();
 
-        JFrame frame = new JFrame("Super Mario Bros.");
+        JFrame frame = new JFrame("Super Nemio Bros.");
         frame.add(uiManager);
         frame.addKeyListener(inputManager);
         frame.addMouseListener(inputManager);
@@ -193,12 +193,12 @@ public class GameEngine implements Runnable {
     }
 
     private void updateCamera() {
-        Mario mario = mapManager.getMario();
-        double marioVelocityX = mario.getVelX();
+        Nemio nemio = mapManager.getNemio();
+        double nemioVelocityX = nemio.getVelX();
         double shiftAmount = 0;
 
-        if (marioVelocityX > 0 && mario.getX() - 600 > camera.getX()) {
-            shiftAmount = marioVelocityX;
+        if (nemioVelocityX > 0 && nemio.getX() - 600 > camera.getX()) {
+            shiftAmount = nemioVelocityX;
         }
 
         camera.moveCam(shiftAmount, 0);
@@ -238,17 +238,17 @@ public class GameEngine implements Runnable {
                 changeSelectedMap(false);
             }
         } else if (gameStatus == GameStatus.RUNNING) {
-            Mario mario = mapManager.getMario();
+            Nemio nemio = mapManager.getNemio();
             if (input == ButtonAction.GO_UP) {
-                mario.jump(this,true);
+                nemio.jump(this,true);
             }else if (input == ButtonAction.GO_DOWN) {
-                mario.jump(this,false);
+                nemio.jump(this,false);
             } else if (input == ButtonAction.M_RIGHT) {
-                mario.move(true, camera);
+                nemio.move(true, camera);
             } else if (input == ButtonAction.M_LEFT) {
-                mario.move(false, camera);
+                nemio.move(false, camera);
             } else if (input == ButtonAction.ACTION_COMPLETED) {
-                mario.setVelX(0);
+                nemio.setVelX(0);
             } else if (input == ButtonAction.FIRE) {
                 mapManager.fire(this);
             } else if (input == ButtonAction.PAUSE_RESUME) {
@@ -359,8 +359,8 @@ public class GameEngine implements Runnable {
         soundManager.playSuperMushroom();
     }
 
-    public void playMarioDies() {
-        soundManager.playMarioDies();
+    public void playNemioDies() {
+        soundManager.playNemioDies();
     }
 
     public void playJump() {

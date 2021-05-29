@@ -98,9 +98,9 @@ public class SoundManager {
 
     }
 
-    public void playMarioDies() {
+    public void playNemioDies() {
 
-        Clip clip = getClip(loadAudio("marioDies"));
+        Clip clip = getClip(loadAudio("nemioDies"));
         clip.start();
 
     }

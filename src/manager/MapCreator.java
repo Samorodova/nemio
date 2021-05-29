@@ -8,7 +8,7 @@ import model.Map;
 import model.enemy.Enemy;
 import model.enemy.Goomba;
 import model.enemy.KoopaTroopa;
-import model.hero.Mario;
+import model.hero.Nemio;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -65,7 +65,7 @@ class MapCreator {
 
         int pixelMultiplier = 48;
 
-        int mario = new Color(160, 160, 160).getRGB();
+        int nemio = new Color(160, 160, 160).getRGB();
         int ordinaryBrick = new Color(0, 0, 255).getRGB();
         int surpriseBrick = new Color(255, 255, 0).getRGB();
         int groundBrick = new Color(255, 0, 0).getRGB();
@@ -108,9 +108,9 @@ class MapCreator {
                     ((KoopaTroopa)enemy).setRightImage(koopaRight);
                     createdMap.addEnemy(enemy);
                 }
-                else if (currentPixel == mario) {
-                    Mario marioObject = new Mario(xLocation, yLocation);//y+347
-                    createdMap.setMario(marioObject);
+                else if (currentPixel == nemio) {
+                    Nemio nemioObject = new Nemio(xLocation, yLocation);//y+347
+                    createdMap.setNemio(nemioObject);
                 }
                 else if(currentPixel == end){
                     EndFlag endPoint= new EndFlag(xLocation+24, yLocation, endFlag);
@@ -137,7 +137,7 @@ class MapCreator {
 
         int pixelMultiplier = 48;
 
-        int mario = new Color(160, 160, 160).getRGB();
+        int nemio = new Color(160, 160, 160).getRGB();
         int ordinaryBrick = new Color(0, 0, 255).getRGB();
         int surpriseBrick = new Color(255, 255, 0).getRGB();
         int groundBrick = new Color(255, 0, 0).getRGB();
@@ -180,9 +180,9 @@ class MapCreator {
                     ((KoopaTroopa)enemy).setRightImage(koopaRight);
                     createdMap.addEnemy(enemy);
                 }
-                else if (currentPixel == mario) {
-                    Mario marioObject = new Mario(xLocation, yLocation, remainingLives, points, coins);//y+347
-                    createdMap.setMario(marioObject);
+                else if (currentPixel == nemio) {
+                    Nemio nemioObject = new Nemio(xLocation, yLocation, remainingLives, points, coins);//y+347
+                    createdMap.setNemio(nemioObject);
                 }
                 else if(currentPixel == end){
                     EndFlag endPoint= new EndFlag(xLocation+24, yLocation, endFlag);
