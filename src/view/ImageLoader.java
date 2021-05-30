@@ -40,7 +40,7 @@ public class ImageLoader {
     }
 
     public BufferedImage getSubImage(BufferedImage image, int col, int row, int w, int h){
-        if((col == 1 || col == 4) && row == 3){ //koopa
+        if((col == 1 || col == 4) && row == 3){ //net
             return image.getSubimage((col-1)*48, 128, w, h);
         }
         return image.getSubimage((col-1)*48, (row-1)*48, w, h);

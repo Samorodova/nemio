@@ -6,8 +6,8 @@ import model.prize.*;
 import view.ImageLoader;
 import model.Map;
 import model.enemy.Enemy;
-import model.enemy.Goomba;
-import model.enemy.KoopaTroopa;
+import model.enemy.Shark;
+import model.enemy.Net;
 import model.hero.Nemio;
 
 import java.awt.*;
@@ -20,7 +20,7 @@ class MapCreator {
     private BufferedImage backgroundImage;
     private BufferedImage superMushroom, oneUpMushroom, fireFlower, coin;
     private BufferedImage ordinaryBrick, surpriseBrick, groundBrick, pipe;
-    private BufferedImage goombaLeft, goombaRight, koopaLeft, koopaRight, endFlag;
+    private BufferedImage sharkLeft, sharkRight, netLeft, netRight, endFlag;
 
 
     MapCreator(ImageLoader imageLoader) {
@@ -32,11 +32,11 @@ class MapCreator {
         this.coin = imageLoader.loadImage("/dollar.png");
         this.ordinaryBrick = imageLoader.loadImage("/water.png");
         this.groundBrick = imageLoader.loadImage("/sand.png");
-        this.goombaLeft = imageLoader.loadImage("/shark.png");
-        this.goombaRight = imageLoader.loadImage("/sharkR.png");
+        this.sharkLeft = imageLoader.loadImage("/shark.png");
+        this.sharkRight = imageLoader.loadImage("/sharkR.png");
         this.pipe = imageLoader.loadImage("/reef.png");
-        this.koopaLeft = imageLoader.loadImage("/net.png");
-        this.koopaRight = imageLoader.loadImage("/net.png");
+        this.netLeft = imageLoader.loadImage("/net.png");
+        this.netRight = imageLoader.loadImage("/net.png");
         this.surpriseBrick = imageLoader.loadImage("/coinBlock.png");
         this.endFlag = imageLoader.loadImage("/end.png");
 
@@ -48,10 +48,10 @@ class MapCreator {
         // this.surpriseBrick = imageLoader.getSubImage(sprite, 2, 1, 48, 48);
         // this.groundBrick = imageLoader.getSubImage(sprite, 2, 2, 48, 48);
         // this.pipe = imageLoader.getSubImage(sprite, 3, 1, 96, 96);
-        // this.goombaLeft = imageLoader.getSubImage(sprite, 2, 4, 48, 48);
-        // this.goombaRight = imageLoader.getSubImage(sprite, 5, 4, 48, 48);
-        //this.koopaLeft = imageLoader.getSubImage(sprite, 1, 3, 48, 64);
-        //this.koopaRight = imageLoader.getSubImage(sprite, 4, 3, 48, 64);
+        // this.sharkLeft = imageLoader.getSubImage(sprite, 2, 4, 48, 48);
+        // this.sharkRight = imageLoader.getSubImage(sprite, 5, 4, 48, 48);
+        //this.netLeft = imageLoader.getSubImage(sprite, 1, 3, 48, 64);
+        //this.netRight = imageLoader.getSubImage(sprite, 4, 3, 48, 64);
         // this.endFlag = imageLoader.getSubImage(sprite, 5, 1, 48, 48);
 
     }
@@ -75,8 +75,8 @@ class MapCreator {
         int surpriseBrick = new Color(255, 255, 0).getRGB();
         int groundBrick = new Color(255, 0, 0).getRGB();
         int pipe = new Color(0, 255, 0).getRGB();
-        int goomba = new Color(0, 255, 255).getRGB();
-        int koopa = new Color(255, 0, 255).getRGB();
+        int shark = new Color(0, 255, 255).getRGB();
+        int net = new Color(255, 0, 255).getRGB();
         int end = new Color(160, 0, 160).getRGB();
 
         for (int x = 0; x < mapImage.getWidth(); x++) {
@@ -92,7 +92,7 @@ class MapCreator {
                 }
                 else if (currentPixel == surpriseBrick) {
                     Prize prize = generateRandomPrize(xLocation, yLocation);
-                    Brick brick = new SurpriseBrick(xLocation, yLocation, this.surpriseBrick, prize);
+                    Brick brick = new CoinBrick(xLocation, yLocation, this.surpriseBrick, prize);
                     createdMap.addBrick(brick);
                 }
                 else if (currentPixel == pipe) {
@@ -103,9 +103,9 @@ class MapCreator {
                     Brick brick = new GroundBrick(xLocation, yLocation, this.groundBrick);
                     createdMap.addGroundBrick(brick);
                 }
-                else if (currentPixel == goomba) {
-                    Enemy enemy = new Goomba(xLocation, yLocation, this.goombaLeft);
-                    ((Goomba)enemy).setRightImage(goombaRight);
+                else if (currentPixel == shark) {
+                    Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
+                    ((Shark)enemy).setRightImage(sharkRight);
                     if(activeMap == 1) {
                         enemy.setVelX(0);
                         enemy.setVelY(3);
@@ -120,9 +120,9 @@ class MapCreator {
                     }
                     createdMap.addEnemy(enemy);
                 }
-                else if (currentPixel == koopa) {
-                    Enemy enemy = new KoopaTroopa(xLocation, yLocation, this.koopaLeft);
-                    ((KoopaTroopa)enemy).setRightImage(koopaRight);
+                else if (currentPixel == net) {
+                    Enemy enemy = new Net(xLocation, yLocation, this.netLeft);
+                    ((Net)enemy).setRightImage(netRight);
                     if(activeMap == 1) {
                         enemy.setVelX(0);
                         enemy.setVelY(3);
@@ -171,8 +171,8 @@ class MapCreator {
         int surpriseBrick = new Color(255, 255, 0).getRGB();
         int groundBrick = new Color(255, 0, 0).getRGB();
         int pipe = new Color(0, 255, 0).getRGB();
-        int goomba = new Color(0, 255, 255).getRGB();
-        int koopa = new Color(255, 0, 255).getRGB();
+        int shark = new Color(0, 255, 255).getRGB();
+        int net = new Color(255, 0, 255).getRGB();
         int end = new Color(160, 0, 160).getRGB();
 
         for (int x = 0; x < mapImage.getWidth(); x++) {
@@ -188,7 +188,7 @@ class MapCreator {
                 }
                 else if (currentPixel == surpriseBrick) {
                     Prize prize = generateRandomPrize(xLocation, yLocation);
-                    Brick brick = new SurpriseBrick(xLocation, yLocation, this.surpriseBrick, prize);
+                    Brick brick = new CoinBrick(xLocation, yLocation, this.surpriseBrick, prize);
                     createdMap.addBrick(brick);
                 }
                 else if (currentPixel == pipe) {
@@ -199,9 +199,9 @@ class MapCreator {
                     Brick brick = new GroundBrick(xLocation, yLocation, this.groundBrick);
                     createdMap.addGroundBrick(brick);
                 }
-                else if (currentPixel == goomba) {
-                    Enemy enemy = new Goomba(xLocation, yLocation, this.goombaLeft);
-                    ((Goomba)enemy).setRightImage(goombaRight);
+                else if (currentPixel == shark) {
+                    Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
+                    ((Shark)enemy).setRightImage(sharkRight);
                     if(activeMap == 1) {
                         enemy.setVelX(0);
                         enemy.setVelY(3);
@@ -216,9 +216,9 @@ class MapCreator {
                     }
                     createdMap.addEnemy(enemy);
                 }
-                else if (currentPixel == koopa) {
-                    Enemy enemy = new KoopaTroopa(xLocation, yLocation, this.koopaLeft);
-                    ((KoopaTroopa)enemy).setRightImage(koopaRight);
+                else if (currentPixel == net) {
+                    Enemy enemy = new Net(xLocation, yLocation, this.netLeft);
+                    ((Net)enemy).setRightImage(netRight);
                     if(activeMap == 1) {
                         enemy.setVelX(0);
                         enemy.setVelY(3);
