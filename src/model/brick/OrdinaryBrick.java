@@ -35,16 +35,6 @@ public class OrdinaryBrick extends Brick {
 
     @Override
     public Prize reveal(GameEngine engine){
-        MapManager manager = engine.getMapManager();
-        if(!manager.getNemio().isSuper())
-            return null;
-
-        breaking = true;
-        manager.addRevealedBrick(this);
-
-        double newX = getX() - 27, newY = getY() - 27;
-        setLocation(newX, newY);
-
         return null;
     }
 

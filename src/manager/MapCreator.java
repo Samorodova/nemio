@@ -18,7 +18,7 @@ class MapCreator {
     private ImageLoader imageLoader;
 
     private BufferedImage backgroundImage;
-    private BufferedImage superMushroom, oneUpMushroom, fireFlower, coin;
+    private BufferedImage coin;
     private BufferedImage ordinaryBrick, surpriseBrick, groundBrick, pipe;
     private BufferedImage sharkLeft, sharkRight, netLeft, netRight, endFlag;
 
@@ -39,10 +39,6 @@ class MapCreator {
         this.netRight = imageLoader.loadImage("/net.png");
         this.surpriseBrick = imageLoader.loadImage("/coinBlock.png");
         this.endFlag = imageLoader.loadImage("/end.png");
-
-        this.superMushroom = imageLoader.getSubImage(sprite, 2, 5, 48, 48);
-        this.oneUpMushroom= imageLoader.getSubImage(sprite, 3, 5, 48, 48);
-        this.fireFlower= imageLoader.getSubImage(sprite, 4, 5, 48, 48);
         // this.coin = imageLoader.getSubImage(sprite, 1, 5, 48, 48);
         // this.ordinaryBrick = imageLoader.getSubImage(sprite, 1, 1, 48, 48);
         // this.surpriseBrick = imageLoader.getSubImage(sprite, 2, 1, 48, 48);

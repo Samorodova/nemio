@@ -53,7 +53,6 @@ public class ImageLoader {
 
 
         for(int i = 0; i < 5; i++){
-            //leftFrames[i] = nemioForms.getSubimage((col-1)*width, (i)*height, width, height);
             leftFrames[i] = loadImage("/clown-fishL.png");
         }
         return leftFrames;
@@ -64,19 +63,8 @@ public class ImageLoader {
         int col = 2;
         int width = 52, height = 48;
 
-        if(nemioForm == 1) { //super nemio
-            col = 5;
-            width = 48;
-            height = 96;
-        }
-        else if(nemioForm == 2){ //fire nemio
-            col = 8;
-            width = 48;
-            height = 96;
-        }
 
         for(int i = 0; i < 5; i++){
-            // rightFrames[i] = nemioForms.getSubimage((col-1)*width, (i)*height, width, height);
             rightFrames[i] = loadImage("/clown-fish.png");
         }
         return rightFrames;

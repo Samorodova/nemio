@@ -55,23 +55,12 @@ public class SoundManager {
         resumeBackground();
     }
 
-    public void playJump() {
-        Clip clip = getClip(loadAudio("jump"));
-        clip.start();
-
-    }
-
     public void playCoin() {
         Clip clip = getClip(loadAudio("coin"));
         clip.start();
 
     }
 
-    public void playFireball() {
-        Clip clip = getClip(loadAudio("fireball"));
-        clip.start();
-
-    }
 
     public void playGameOver() {
         Clip clip = getClip(loadAudio("gameOver"));
@@ -91,13 +80,6 @@ public class SoundManager {
 
     }
 
-    public void playSuperMushroom() {
-
-        Clip clip = getClip(loadAudio("superMushroom"));
-        clip.start();
-
-    }
-
     public void playNemioDies() {
 
         Clip clip = getClip(loadAudio("nemioDies"));
@@ -105,7 +87,5 @@ public class SoundManager {
 
     }
 
-    public void playFireFlower() {
 
-    }
 }

@@ -367,24 +367,8 @@ public class GameEngine implements Runnable {
         soundManager.playOneUp();
     }
 
-    public void playSuperMushroom() {
-        soundManager.playSuperMushroom();
-    }
-
     public void playNemioDies() {
         soundManager.playNemioDies();
-    }
-
-    public void playJump() {
-        soundManager.playJump();
-    }
-
-    public void playFireFlower() {
-        soundManager.playFireFlower();
-    }
-
-    public void playFireball() {
-        soundManager.playFireball();
     }
 
     public void playStomp() {

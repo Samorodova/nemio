@@ -10,11 +10,9 @@ public class NemioForm {
     public static final int SMALL = 0, SUPER = 1, FIRE = 2;
 
     private Animation animation;
-    private boolean isSuper;
 
-    public NemioForm(Animation animation, boolean isSuper){
+    public NemioForm(Animation animation){
         this.animation = animation;
-        this.isSuper = isSuper;
 
         ImageLoader imageLoader = new ImageLoader();
     }
@@ -49,15 +47,8 @@ public class NemioForm {
 
         Animation newAnimation = new Animation(leftFrames, rightFrames);
 
-        return new NemioForm(newAnimation, false);
+        return new NemioForm(newAnimation);
     }
 
-    public boolean isSuper() {
-        return isSuper;
-    }
-
-    public void setSuper(boolean aSuper) {
-        isSuper = aSuper;
-    }
 
 }
