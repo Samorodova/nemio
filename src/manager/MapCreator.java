@@ -18,7 +18,7 @@ class MapCreator {
     private ImageLoader imageLoader;
 
     private BufferedImage backgroundImage;
-    private BufferedImage coin;
+    private BufferedImage coin, food;
     private BufferedImage ordinaryBrick, surpriseBrick, groundBrick, pipe;
     private BufferedImage sharkLeft, sharkRight, netLeft, netRight, endFlag;
 
@@ -30,6 +30,7 @@ class MapCreator {
 
         this.backgroundImage = imageLoader.loadImage("/background.png");
         this.coin = imageLoader.loadImage("/dollar.png");
+        this.food = imageLoader.loadImage("/food.png");
         this.ordinaryBrick = imageLoader.loadImage("/water.png");
         this.groundBrick = imageLoader.loadImage("/sand.png");
         this.sharkLeft = imageLoader.loadImage("/shark.png");
@@ -39,17 +40,6 @@ class MapCreator {
         this.netRight = imageLoader.loadImage("/net.png");
         this.surpriseBrick = imageLoader.loadImage("/coinBlock.png");
         this.endFlag = imageLoader.loadImage("/end.png");
-        // this.coin = imageLoader.getSubImage(sprite, 1, 5, 48, 48);
-        // this.ordinaryBrick = imageLoader.getSubImage(sprite, 1, 1, 48, 48);
-        // this.surpriseBrick = imageLoader.getSubImage(sprite, 2, 1, 48, 48);
-        // this.groundBrick = imageLoader.getSubImage(sprite, 2, 2, 48, 48);
-        // this.pipe = imageLoader.getSubImage(sprite, 3, 1, 96, 96);
-        // this.sharkLeft = imageLoader.getSubImage(sprite, 2, 4, 48, 48);
-        // this.sharkRight = imageLoader.getSubImage(sprite, 5, 4, 48, 48);
-        //this.netLeft = imageLoader.getSubImage(sprite, 1, 3, 48, 64);
-        //this.netRight = imageLoader.getSubImage(sprite, 4, 3, 48, 64);
-        // this.endFlag = imageLoader.getSubImage(sprite, 5, 1, 48, 48);
-
     }
 
     Map createMap(String mapPath, double timeLimit, int activeMap) {
@@ -74,6 +64,7 @@ class MapCreator {
         int shark = new Color(0, 255, 255).getRGB();
         int net = new Color(255, 0, 255).getRGB();
         int end = new Color(160, 0, 160).getRGB();
+        int plancton = new Color(128, 128, 128).getRGB();
 
         for (int x = 0; x < mapImage.getWidth(); x++) {
             for (int y = 0; y < mapImage.getHeight(); y++) {
@@ -87,7 +78,7 @@ class MapCreator {
                     createdMap.addBrick(brick);
                 }
                 else if (currentPixel == surpriseBrick) {
-                    Prize prize = generateRandomPrize(xLocation, yLocation);
+                    Prize prize = generateCoin(xLocation, yLocation);
                     Brick brick = new CoinBrick(xLocation, yLocation, this.surpriseBrick, prize);
                     createdMap.addBrick(brick);
                 }
@@ -98,6 +89,10 @@ class MapCreator {
                 else if (currentPixel == groundBrick) {
                     Brick brick = new GroundBrick(xLocation, yLocation, this.groundBrick);
                     createdMap.addGroundBrick(brick);
+                }
+                else if (currentPixel == plancton) {
+                    Brick food = new GroundBrick(xLocation, yLocation, this.food);
+                    createdMap.addGroundBrick(food);
                 }
                 else if (currentPixel == shark) {
                     Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
@@ -164,12 +159,13 @@ class MapCreator {
 
         int nemio = new Color(160, 160, 160).getRGB();
         int ordinaryBrick = new Color(0, 0, 255).getRGB();
-        int surpriseBrick = new Color(255, 255, 0).getRGB();
+        int coinBrick = new Color(255, 255, 0).getRGB();
         int groundBrick = new Color(255, 0, 0).getRGB();
         int pipe = new Color(0, 255, 0).getRGB();
         int shark = new Color(0, 255, 255).getRGB();
         int net = new Color(255, 0, 255).getRGB();
         int end = new Color(160, 0, 160).getRGB();
+        int plancton = new Color(128, 128, 128).getRGB();
 
         for (int x = 0; x < mapImage.getWidth(); x++) {
             for (int y = 0; y < mapImage.getHeight(); y++) {
@@ -182,8 +178,8 @@ class MapCreator {
                     Brick brick = new OrdinaryBrick(xLocation, yLocation, this.ordinaryBrick);
                     createdMap.addBrick(brick);
                 }
-                else if (currentPixel == surpriseBrick) {
-                    Prize prize = generateRandomPrize(xLocation, yLocation);
+                else if (currentPixel == coinBrick) {
+                    Prize prize = generateCoin(xLocation, yLocation);
                     Brick brick = new CoinBrick(xLocation, yLocation, this.surpriseBrick, prize);
                     createdMap.addBrick(brick);
                 }
@@ -194,6 +190,10 @@ class MapCreator {
                 else if (currentPixel == groundBrick) {
                     Brick brick = new GroundBrick(xLocation, yLocation, this.groundBrick);
                     createdMap.addGroundBrick(brick);
+                }
+                else if (currentPixel == plancton) {
+                    Brick food = new GroundBrick(xLocation, yLocation, this.food);
+                    createdMap.addGroundBrick(food);
                 }
                 else if (currentPixel == shark) {
                     Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
@@ -244,23 +244,9 @@ class MapCreator {
         return createdMap;
     }
 
-    private Prize generateRandomPrize(double x, double y){
+    private Prize generateCoin(double x, double y){
         Prize generated;
-        int random = (int)(Math.random() * 12);
-
-        /*if(random == 0){ //super mushroom
-            generated = new SuperMushroom(x, y, this.superMushroom);
-        }
-        else if(random == 1){ //fire flower
-            generated = new FireFlower(x, y, this.fireFlower);
-        }
-        else if(random == 2){ //one up mushroom
-            generated = new OneUpMushroom(x, y, this.oneUpMushroom);
-        }*/
-        //coin
         generated = new Coin(x, y, this.coin, 50);
-
-
         return generated;
     }
 
