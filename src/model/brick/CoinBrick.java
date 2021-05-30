@@ -1,6 +1,7 @@
 package model.brick;
 
 import manager.GameEngine;
+import model.hero.Nemio;
 import model.prize.Prize;
 
 import java.awt.image.BufferedImage;
@@ -36,5 +37,10 @@ public class CoinBrick extends Brick{
     @Override
     public Prize getPrize(){
         return prize;
+    }
+
+    @Override
+    public void onTouch(Nemio nemio, GameEngine engine) {
+
     }
 }

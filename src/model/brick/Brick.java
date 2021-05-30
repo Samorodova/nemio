@@ -3,6 +3,7 @@ package model.brick;
 import manager.GameEngine;
 import model.GameObject;
 import model.Map;
+import model.hero.Nemio;
 import model.prize.Prize;
 
 import java.awt.image.BufferedImage;
@@ -39,4 +40,6 @@ public abstract class Brick extends GameObject{
     public Prize getPrize() {
         return null;
     }
+
+    public abstract void onTouch(Nemio nemio, GameEngine engine);
 }

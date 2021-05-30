@@ -3,6 +3,7 @@ package manager;
 import model.GameObject;
 import model.Map;
 import model.brick.Brick;
+import model.brick.Food;
 import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
 import model.hero.Nemio;
@@ -57,7 +58,6 @@ public class MapManager {
         return map.getNemio();
     }
 
-
     public boolean isGameOver() {
         return getNemio().getRemainingLives() == 0 || map.isTimeOver();
     }
@@ -100,9 +100,16 @@ public class MapManager {
         checkBottomCollisions(engine, activeMap);
         checkTopCollisions(engine, activeMap);
         checkNemioHorizontalCollision(engine, activeMap);
+        //checkFoodCollisions(engine, activeMap);
         checkEnemyCollisions();
         checkPrizeCollision();
         checkPrizeContact(engine);
+    }
+
+    private void checkFoodCollisions(GameEngine engine, int activeMap){
+        Nemio nemio = getNemio();
+        Rectangle nemioBounds = nemio.getBounds();
+
     }
 
     private void checkBottomCollisions(GameEngine engine, int activeMap) {
@@ -115,6 +122,19 @@ public class MapManager {
 
         if (!nemio.isJumping())
             nemio.setFalling(true);
+
+        ArrayList<Brick> toBeRemovedFood = new ArrayList<>();
+        ArrayList<Food> foods = map.getFoodBricks();
+
+        for (Brick food : foods){
+            Rectangle foodBounds = food.getBounds();
+            if (foodBounds.intersects(nemio.getBounds())) {
+                food.onTouch(nemio, engine);
+                toBeRemovedFood.add(food);
+            }
+        }
+
+        removeObjectsFood(toBeRemovedFood);
 
         for (Brick brick : bricks) {
             Rectangle brickTopBounds = brick.getTopBounds();
@@ -361,6 +381,7 @@ public class MapManager {
         ArrayList<GameObject> toBeRemoved = new ArrayList<>();
 
         Rectangle nemioBounds = getNemio().getBounds();
+
         for(Prize prize : prizes){
             Rectangle prizeBounds = prize.getBounds();
             if (prizeBounds.intersects(nemioBounds)) {
@@ -386,6 +407,14 @@ public class MapManager {
             else if(object instanceof Coin || object instanceof BoostItem){
                 map.removePrize((Prize)object);
             }
+        }
+    }
+
+    private void removeObjectsFood(ArrayList<Brick> list){
+        if(list == null)
+            return;
+        for(Brick object : list){
+            map.removeFood(object);
         }
     }
 

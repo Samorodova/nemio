@@ -3,6 +3,7 @@ package model.brick;
 import manager.GameEngine;
 import manager.MapManager;
 import model.Map;
+import model.hero.Nemio;
 import model.prize.Prize;
 import view.Animation;
 import view.ImageLoader;
@@ -36,6 +37,11 @@ public class OrdinaryBrick extends Brick {
     @Override
     public Prize reveal(GameEngine engine){
         return null;
+    }
+
+    @Override
+    public void onTouch(Nemio nemio, GameEngine engine) {
+
     }
 
     public int getFrames(){

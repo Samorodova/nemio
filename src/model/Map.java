@@ -1,6 +1,7 @@
 package model;
 
 import model.brick.Brick;
+import model.brick.Food;
 import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
 import model.hero.Nemio;
@@ -22,6 +23,7 @@ public class Map {
     private ArrayList<Brick> groundBricks = new ArrayList<>();
     private ArrayList<Prize> revealedPrizes = new ArrayList<>();
     private ArrayList<Brick> revealedBricks = new ArrayList<>();
+    private ArrayList<Food> foodBricks = new ArrayList<>();
     private EndFlag endPoint;
     private BufferedImage backgroundImage;
     private double bottomBorder = 720 - 96;
@@ -49,6 +51,9 @@ public class Map {
         return enemies;
     }
 
+    public ArrayList<Food> getFoodBricks() {
+        return foodBricks;
+    }
 
     public ArrayList<Prize> getRevealedPrizes() {
         return revealedPrizes;
@@ -63,12 +68,18 @@ public class Map {
         return allBricks;
     }
 
+
+
     public void addBrick(Brick brick) {
         this.bricks.add(brick);
     }
 
     public void addGroundBrick(Brick brick) {
         this.groundBricks.add(brick);
+    }
+
+    public void addFoodBrick(Food food) {
+        this.foodBricks.add(food);
     }
 
     public void addEnemy(Enemy enemy) {
@@ -107,6 +118,11 @@ public class Map {
 
         for(Brick brick : groundBricks){
             brick.draw(g2);
+        }
+
+        for(Brick brick : foodBricks){
+            if(brick != null)
+                brick.draw(g2);
         }
     }
 
@@ -178,6 +194,10 @@ public class Map {
 
     public void removeEnemy(Enemy object) {
         enemies.remove(object);
+    }
+
+    public void removeFood(Brick object) {
+        foodBricks.remove(object);
     }
 
     public void removePrize(Prize object) {

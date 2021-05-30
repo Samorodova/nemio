@@ -91,8 +91,8 @@ class MapCreator {
                     createdMap.addGroundBrick(brick);
                 }
                 else if (currentPixel == plancton) {
-                    Brick food = new GroundBrick(xLocation, yLocation, this.food);
-                    createdMap.addGroundBrick(food);
+                    Food food = new Food(xLocation, yLocation, this.food);
+                    createdMap.addFoodBrick(food);
                 }
                 else if (currentPixel == shark) {
                     Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
@@ -192,8 +192,8 @@ class MapCreator {
                     createdMap.addGroundBrick(brick);
                 }
                 else if (currentPixel == plancton) {
-                    Brick food = new GroundBrick(xLocation, yLocation, this.food);
-                    createdMap.addGroundBrick(food);
+                    Food food = new Food(xLocation, yLocation, this.food);
+                    createdMap.addFoodBrick(food);
                 }
                 else if (currentPixel == shark) {
                     Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
