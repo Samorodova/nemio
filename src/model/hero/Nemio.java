@@ -18,6 +18,7 @@ public class Nemio extends GameObject{
     private NemioForm nemioForm;
     private boolean toRight = true;
     private boolean toUp = true;
+    private boolean toBottom = true;
 
     public Nemio(double x, double y){
         super(x, y, null);
@@ -132,6 +133,10 @@ public class Nemio extends GameObject{
 
     public boolean getToUp() {
         return toUp;
+    }
+
+    public boolean getToBottom() {
+        return toBottom;
     }
 
     public void resetLocation() {

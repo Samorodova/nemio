@@ -176,7 +176,6 @@ public class Map {
         revealedBricks.add(ordinaryBrick);
     }
 
-
     public void removeEnemy(Enemy object) {
         enemies.remove(object);
     }

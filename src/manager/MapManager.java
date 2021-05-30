@@ -97,15 +97,15 @@ public class MapManager {
             return;
         }
 
-        checkBottomCollisions(engine);
-        checkTopCollisions(engine);
+        checkBottomCollisions(engine, activeMap);
+        checkTopCollisions(engine, activeMap);
         checkNemioHorizontalCollision(engine, activeMap);
         checkEnemyCollisions();
         checkPrizeCollision();
         checkPrizeContact(engine);
     }
 
-    private void checkBottomCollisions(GameEngine engine) {
+    private void checkBottomCollisions(GameEngine engine, int activeMap) {
         Nemio nemio = getNemio();
         ArrayList<Brick> bricks = map.getAllBricks();
         ArrayList<Enemy> enemies = map.getEnemies();
@@ -125,14 +125,17 @@ public class MapManager {
             }
         }
 
-        for (Enemy enemy : enemies) {
-            Rectangle enemyTopBounds = enemy.getTopBounds();
-            if (nemioBottomBounds.intersects(enemyTopBounds)) {
-                nemio.acquirePoints(100);
+        boolean nemioDies = false;
+
+        Rectangle nemioBounds = nemio.getBottomBounds();
+        for(Enemy enemy : enemies){
+            Rectangle enemyBounds = enemy.getTopBounds();
+            if (nemioBounds.intersects(enemyBounds)) {
+                nemioDies = nemio.onTouchEnemy(engine);
                 toBeRemoved.add(enemy);
-                engine.playStomp();
             }
         }
+        removeObjects(toBeRemoved);
 
         if (nemio.getY() + nemio.getDimension().height >= map.getBottomBorder()) {
             nemio.setY(map.getBottomBorder() - nemio.getDimension().height);
@@ -143,11 +146,17 @@ public class MapManager {
         }
 
         removeObjects(toBeRemoved);
+
+        if(nemioDies) {
+            resetCurrentMap(engine, activeMap);
+        }
     }
 
-    private void checkTopCollisions(GameEngine engine) {
+    private void checkTopCollisions(GameEngine engine, int activeMap) {
         Nemio nemio = getNemio();
         ArrayList<Brick> bricks = map.getAllBricks();
+        ArrayList<Enemy> enemies = map.getEnemies();
+        ArrayList<GameObject> toBeRemoved = new ArrayList<>();
 
         Rectangle nemioTopBounds = nemio.getTopBounds();
         for (Brick brick : bricks) {
@@ -159,6 +168,22 @@ public class MapManager {
                 if(prize != null)
                     map.addRevealedPrize(prize);
             }
+        }
+
+        boolean nemioDies = false;
+
+        Rectangle nemioBounds = nemio.getTopBounds();
+        for(Enemy enemy : enemies){
+            Rectangle enemyBounds = enemy.getBottomBounds();
+            if (nemioBounds.intersects(enemyBounds)) {
+                nemioDies = nemio.onTouchEnemy(engine);
+                toBeRemoved.add(enemy);
+            }
+        }
+        removeObjects(toBeRemoved);
+
+        if(nemioDies) {
+            resetCurrentMap(engine, activeMap);
         }
 
         if (nemio.getY() <= map.getTopBorder()) {
@@ -192,7 +217,9 @@ public class MapManager {
         }
 
         for(Enemy enemy : enemies){
-            Rectangle enemyBounds = !toRight ? enemy.getRightBounds() : enemy.getLeftBounds();
+            Rectangle enemyBounds;
+            if (!toRight) enemyBounds = enemy.getRightBounds();
+            else enemyBounds = enemy.getLeftBounds();
             if (nemioBounds.intersects(enemyBounds)) {
                 nemioDies = nemio.onTouchEnemy(engine);
                 toBeRemoved.add(enemy);
@@ -360,10 +387,6 @@ public class MapManager {
                 map.removePrize((Prize)object);
             }
         }
-    }
-
-    public void addRevealedBrick(OrdinaryBrick ordinaryBrick) {
-        map.addRevealedBrick(ordinaryBrick);
     }
 
     public void updateTime(){
