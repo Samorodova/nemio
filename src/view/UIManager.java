@@ -34,7 +34,7 @@ public class UIManager extends JPanel{
 
         BufferedImage sprite = loader.loadImage("/sprite.png");
         this.heartIcon = loader.loadImage("/heart-icon.png");
-        this.coinIcon = loader.getSubImage(sprite, 1, 5, 48, 48);
+        this.coinIcon = loader.loadImage("/dollar.png");
         this.selectIcon = loader.loadImage("/squid.png");
         this.startScreenImage = loader.loadImage("/start-screen.png");
         this.helpScreenImage = loader.loadImage("/HelpScreen.png");

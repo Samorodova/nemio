@@ -202,7 +202,7 @@ class MapCreator {
         Prize generated;
         int random = (int)(Math.random() * 12);
 
-        if(random == 0){ //super mushroom
+        /*if(random == 0){ //super mushroom
             generated = new SuperMushroom(x, y, this.superMushroom);
         }
         else if(random == 1){ //fire flower
@@ -210,10 +210,10 @@ class MapCreator {
         }
         else if(random == 2){ //one up mushroom
             generated = new OneUpMushroom(x, y, this.oneUpMushroom);
-        }
-        else{ //coin
-            generated = new Coin(x, y, this.coin, 50);
-        }
+        }*/
+        //coin
+        generated = new Coin(x, y, this.coin, 50);
+
 
         return generated;
     }
