@@ -37,20 +37,22 @@ class MapCreator {
         this.pipe = imageLoader.loadImage("/reef.png");
         this.koopaLeft = imageLoader.loadImage("/net.png");
         this.koopaRight = imageLoader.loadImage("/net.png");
+        this.surpriseBrick = imageLoader.loadImage("/coinBlock.png");
+        this.endFlag = imageLoader.loadImage("/end.png");
 
         this.superMushroom = imageLoader.getSubImage(sprite, 2, 5, 48, 48);
         this.oneUpMushroom= imageLoader.getSubImage(sprite, 3, 5, 48, 48);
         this.fireFlower= imageLoader.getSubImage(sprite, 4, 5, 48, 48);
         // this.coin = imageLoader.getSubImage(sprite, 1, 5, 48, 48);
         // this.ordinaryBrick = imageLoader.getSubImage(sprite, 1, 1, 48, 48);
-        this.surpriseBrick = imageLoader.getSubImage(sprite, 2, 1, 48, 48);
+        // this.surpriseBrick = imageLoader.getSubImage(sprite, 2, 1, 48, 48);
         // this.groundBrick = imageLoader.getSubImage(sprite, 2, 2, 48, 48);
         // this.pipe = imageLoader.getSubImage(sprite, 3, 1, 96, 96);
         // this.goombaLeft = imageLoader.getSubImage(sprite, 2, 4, 48, 48);
         // this.goombaRight = imageLoader.getSubImage(sprite, 5, 4, 48, 48);
         //this.koopaLeft = imageLoader.getSubImage(sprite, 1, 3, 48, 64);
         //this.koopaRight = imageLoader.getSubImage(sprite, 4, 3, 48, 64);
-        this.endFlag = imageLoader.getSubImage(sprite, 5, 1, 48, 48);
+        // this.endFlag = imageLoader.getSubImage(sprite, 5, 1, 48, 48);
 
     }
 

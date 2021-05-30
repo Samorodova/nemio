@@ -18,8 +18,8 @@ public class SurpriseBrick extends Brick{
 
     @Override
     public Prize reveal(GameEngine engine){
-        BufferedImage newStyle = engine.getImageLoader().loadImage("/sprite.png");
-        newStyle = engine.getImageLoader().getSubImage(newStyle, 1, 2, 48, 48);
+        BufferedImage newStyle;
+        newStyle = engine.getImageLoader().loadImage("/sand.png");
 
         if(prize != null){
             prize.reveal();
