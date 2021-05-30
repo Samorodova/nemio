@@ -5,7 +5,6 @@ import model.Map;
 import model.brick.Brick;
 import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
-import model.hero.Fireball;
 import model.hero.Nemio;
 import model.prize.BoostItem;
 import model.prize.Coin;
@@ -58,13 +57,6 @@ public class MapManager {
         return map.getNemio();
     }
 
-    public void fire(GameEngine engine) {
-        Fireball fireball = getNemio().fire();
-        if (fireball != null) {
-            map.addFireball(fireball);
-            engine.playFireball();
-        }
-    }
 
     public boolean isGameOver() {
         return getNemio().getRemainingLives() == 0 || map.isTimeOver();
@@ -111,7 +103,6 @@ public class MapManager {
         checkEnemyCollisions();
         checkPrizeCollision();
         checkPrizeContact(engine);
-        checkFireballContact();
     }
 
     private void checkBottomCollisions(GameEngine engine) {
@@ -356,44 +347,13 @@ public class MapManager {
         removeObjects(toBeRemoved);
     }
 
-    private void checkFireballContact() {
-        ArrayList<Fireball> fireballs = map.getFireballs();
-        ArrayList<Enemy> enemies = map.getEnemies();
-        ArrayList<Brick> bricks = map.getAllBricks();
-        ArrayList<GameObject> toBeRemoved = new ArrayList<>();
-
-        for(Fireball fireball : fireballs){
-            Rectangle fireballBounds = fireball.getBounds();
-
-            for(Enemy enemy : enemies){
-                Rectangle enemyBounds = enemy.getBounds();
-                if (fireballBounds.intersects(enemyBounds)) {
-                    acquirePoints(100);
-                    toBeRemoved.add(enemy);
-                    toBeRemoved.add(fireball);
-                }
-            }
-
-            for(Brick brick : bricks){
-                Rectangle brickBounds = brick.getBounds();
-                if (fireballBounds.intersects(brickBounds)) {
-                    toBeRemoved.add(fireball);
-                }
-            }
-        }
-
-        removeObjects(toBeRemoved);
-    }
 
     private void removeObjects(ArrayList<GameObject> list){
         if(list == null)
             return;
 
         for(GameObject object : list){
-            if(object instanceof Fireball){
-                map.removeFireball((Fireball)object);
-            }
-            else if(object instanceof Enemy){
+            if(object instanceof Enemy){
                 map.removeEnemy((Enemy)object);
             }
             else if(object instanceof Coin || object instanceof BoostItem){

@@ -96,7 +96,7 @@ class MapCreator {
                     createdMap.addBrick(brick);
                 }
                 else if (currentPixel == pipe) {
-                    Brick brick = new Pipe(xLocation, yLocation, this.pipe);
+                    Brick brick = new Coral(xLocation, yLocation, this.pipe);
                     createdMap.addGroundBrick(brick);
                 }
                 else if (currentPixel == groundBrick) {
@@ -192,7 +192,7 @@ class MapCreator {
                     createdMap.addBrick(brick);
                 }
                 else if (currentPixel == pipe) {
-                    Brick brick = new Pipe(xLocation, yLocation, this.pipe);
+                    Brick brick = new Coral(xLocation, yLocation, this.pipe);
                     createdMap.addGroundBrick(brick);
                 }
                 else if (currentPixel == groundBrick) {

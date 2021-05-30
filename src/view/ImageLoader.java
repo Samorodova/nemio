@@ -51,16 +51,6 @@ public class ImageLoader {
         int col = 1;
         int width = 52, height = 48;
 
-        if(nemioForm == 1) { //super nemio
-            col = 4;
-            width = 48;
-            height = 96;
-        }
-        else if(nemioForm == 2){ //fire nemio
-            col = 7;
-            width = 48;
-            height = 96;
-        }
 
         for(int i = 0; i < 5; i++){
             //leftFrames[i] = nemioForms.getSubimage((col-1)*width, (i)*height, width, height);

@@ -2,9 +2,9 @@ package model.brick;
 
 import java.awt.image.BufferedImage;
 
-public class Pipe extends Brick{
+public class Coral extends Brick{
 
-    public Pipe(double x, double y, BufferedImage style){
+    public Coral(double x, double y, BufferedImage style){
         super(x, y, style);
         setBreakable(false);
         setEmpty(true);

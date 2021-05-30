@@ -263,8 +263,6 @@ public class GameEngine implements Runnable {
                 nemio.move(false, camera);
             } else if (input == ButtonAction.ACTION_COMPLETED) {
                 nemio.setVelX(0);
-            } else if (input == ButtonAction.FIRE) {
-                mapManager.fire(this);
             } else if (input == ButtonAction.PAUSE_RESUME) {
                 pauseGame();
             }

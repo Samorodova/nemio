@@ -3,7 +3,6 @@ package model;
 import model.brick.Brick;
 import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
-import model.hero.Fireball;
 import model.hero.Nemio;
 import model.prize.BoostItem;
 import model.prize.Coin;
@@ -23,7 +22,6 @@ public class Map {
     private ArrayList<Brick> groundBricks = new ArrayList<>();
     private ArrayList<Prize> revealedPrizes = new ArrayList<>();
     private ArrayList<Brick> revealedBricks = new ArrayList<>();
-    private ArrayList<Fireball> fireballs = new ArrayList<>();
     private EndFlag endPoint;
     private BufferedImage backgroundImage;
     private double bottomBorder = 720 - 96;
@@ -51,9 +49,6 @@ public class Map {
         return enemies;
     }
 
-    public ArrayList<Fireball> getFireballs() {
-        return fireballs;
-    }
 
     public ArrayList<Prize> getRevealedPrizes() {
         return revealedPrizes;
@@ -85,15 +80,8 @@ public class Map {
         drawPrizes(g2);
         drawBricks(g2);
         drawEnemies(g2);
-        drawFireballs(g2);
         drawNemio(g2);
         endPoint.draw(g2);
-    }
-
-    private void drawFireballs(Graphics2D g2) {
-        for(Fireball fireball : fireballs){
-            fireball.draw(g2);
-        }
     }
 
     private void drawPrizes(Graphics2D g2) {
@@ -152,10 +140,6 @@ public class Map {
             }
         }
 
-        for (Fireball fireball: fireballs) {
-            fireball.updateLocation();
-        }
-
         for(Iterator<Brick> brickIterator = revealedBricks.iterator(); brickIterator.hasNext();){
             OrdinaryBrick brick = (OrdinaryBrick)brickIterator.next();
             brick.animate();
@@ -180,10 +164,6 @@ public class Map {
         revealedPrizes.add(prize);
     }
 
-    public void addFireball(Fireball fireball) {
-        fireballs.add(fireball);
-    }
-
     public void setEndPoint(EndFlag endPoint) {
         this.endPoint = endPoint;
     }
@@ -196,9 +176,6 @@ public class Map {
         revealedBricks.add(ordinaryBrick);
     }
 
-    public void removeFireball(Fireball object) {
-        fireballs.remove(object);
-    }
 
     public void removeEnemy(Enemy object) {
         enemies.remove(object);

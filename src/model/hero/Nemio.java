@@ -33,7 +33,7 @@ public class Nemio extends GameObject{
         BufferedImage[] rightFrames = imageLoader.getRightFrames(NemioForm.SMALL);
 
         Animation animation = new Animation(leftFrames, rightFrames);
-        nemioForm = new NemioForm(animation, false, false);
+        nemioForm = new NemioForm(animation, false);
         setStyle(nemioForm.getCurrentStyle(toRight, false, false));
     }
 
@@ -51,7 +51,7 @@ public class Nemio extends GameObject{
         BufferedImage[] rightFrames = imageLoader.getRightFrames(NemioForm.SMALL);
 
         Animation animation = new Animation(leftFrames, rightFrames);
-        nemioForm = new NemioForm(animation, false, false);
+        nemioForm = new NemioForm(animation, false);
         setStyle(nemioForm.getCurrentStyle(toRight, false, false));
     }
 
@@ -89,7 +89,7 @@ public class Nemio extends GameObject{
 
     public boolean onTouchEnemy(GameEngine engine){
 
-        if(!nemioForm.isSuper() && !nemioForm.isFire()){
+        if(!nemioForm.isSuper()){
             remainingLives--;
             engine.playNemioDies();
             return true;
@@ -100,10 +100,6 @@ public class Nemio extends GameObject{
             setDimension(48, 48);
             return false;
         }
-    }
-
-    public Fireball fire(){
-        return nemioForm.fire(toRight, getX(), getY());
     }
 
     public void acquireCoin() {
