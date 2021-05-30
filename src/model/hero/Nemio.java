@@ -66,15 +66,15 @@ public class Nemio extends GameObject{
     }
 
     public void jump(GameEngine engine, boolean toUp) {
-            if(toUp) {
-                setJumpingUp(true);
-                setVelY(5);
-            }
-            else {
-                setJumpingDown(true);
-                setVelY(5);
-            }
-            //engine.playJump();
+        if(toUp) {
+            setJumpingUp(true);
+            setVelY(5);
+        }
+        else {
+            setJumpingDown(true);
+            setVelY(5);
+        }
+        //engine.playJump();
     }
 
     public void move(boolean toRight, Camera camera) {

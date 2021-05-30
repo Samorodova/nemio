@@ -28,24 +28,24 @@ public class MapManager {
         map.updateLocations();
     }
 
-    public void resetCurrentMap(GameEngine engine) {
+    public void resetCurrentMap(GameEngine engine, int activeMap) {
         Nemio nemio = getNemio();
         nemio.resetLocation();
         engine.resetCamera();
-        createMap(engine.getImageLoader(), map.getPath());
+        createMap(engine.getImageLoader(), map.getPath(), activeMap);
         map.setNemio(nemio);
     }
 
-    public boolean createMap(ImageLoader loader, String path) {
+    public boolean createMap(ImageLoader loader, String path, int activeMap) {
         MapCreator mapCreator = new MapCreator(loader);
-        map = mapCreator.createMap("/maps/" + path, 400);
+        map = mapCreator.createMap("/maps/" + path, 400, activeMap);
 
         return map != null;
     }
 
-    public boolean createNotFirstMap(ImageLoader loader, String path) {
+    public boolean createNotFirstMap(ImageLoader loader, String path, int activeMap) {
         MapCreator mapCreator = new MapCreator(loader);
-        map = mapCreator.createMap("/maps/" + path, 400, getRemainingLives(), getScore(), getCoins());
+        map = mapCreator.createMap("/maps/" + path, 400, getRemainingLives(), getScore(), getCoins(), activeMap);
 
         return map != null;
     }
@@ -100,14 +100,14 @@ public class MapManager {
         return getNemio().getX() >= map.getEndPoint().getX() + 320;
     }
 
-    public void checkCollisions(GameEngine engine) {
+    public void checkCollisions(GameEngine engine, int activeMap) {
         if (map == null) {
             return;
         }
 
         checkBottomCollisions(engine);
         checkTopCollisions(engine);
-        checkNemioHorizontalCollision(engine);
+        checkNemioHorizontalCollision(engine, activeMap);
         checkEnemyCollisions();
         checkPrizeCollision();
         checkPrizeContact(engine);
@@ -145,7 +145,7 @@ public class MapManager {
 
         if (nemio.getY() + nemio.getDimension().height >= map.getBottomBorder()) {
             nemio.setY(map.getBottomBorder() - nemio.getDimension().height);
-           // nemio.setFalling(false);
+            // nemio.setFalling(false);
             nemio.setJumpingDown(false);
             nemio.setJumpingUp(false);
             nemio.setVelY(0);
@@ -171,14 +171,14 @@ public class MapManager {
         }
 
         if (nemio.getY() <= map.getTopBorder()) {
-              nemio.setY(0);
-              nemio.setJumpingUp(false);
-              nemio.setJumpingDown(false);
-              nemio.setVelY(0);
+            nemio.setY(0);
+            nemio.setJumpingUp(false);
+            nemio.setJumpingDown(false);
+            nemio.setVelY(0);
         }
     }
 
-    private void checkNemioHorizontalCollision(GameEngine engine){
+    private void checkNemioHorizontalCollision(GameEngine engine, int activeMap){
         Nemio nemio = getNemio();
         ArrayList<Brick> bricks = map.getAllBricks();
         ArrayList<Enemy> enemies = map.getEnemies();
@@ -216,7 +216,7 @@ public class MapManager {
         }
 
         if(nemioDies) {
-            resetCurrentMap(engine);
+            resetCurrentMap(engine, activeMap);
         }
     }
 
@@ -247,7 +247,7 @@ public class MapManager {
                 }
 
                 if (enemyBottomBounds.intersects(brickTopBounds)){
-                  //  enemy.setFalling(false);
+                    //  enemy.setFalling(false);
                     enemy.setJumpingUp(true);
                     enemy.setVelY(-enemy.getVelY());
                     enemy.setY(brick.getY() - enemy.getDimension().height);
@@ -262,7 +262,7 @@ public class MapManager {
             }
 
             if(enemy.getY() + enemy.getDimension().height > map.getBottomBorder()){
-               // enemy.setFalling(false);
+                // enemy.setFalling(false);
                 enemy.setJumpingUp(true);
                 enemy.setVelY(-enemy.getVelY());
                 enemy.setY(map.getBottomBorder()-enemy.getDimension().height);

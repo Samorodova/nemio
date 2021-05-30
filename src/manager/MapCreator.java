@@ -54,7 +54,7 @@ class MapCreator {
 
     }
 
-    Map createMap(String mapPath, double timeLimit) {
+    Map createMap(String mapPath, double timeLimit, int activeMap) {
         BufferedImage mapImage = imageLoader.loadImage(mapPath);
 
         if (mapImage == null) {
@@ -104,11 +104,35 @@ class MapCreator {
                 else if (currentPixel == goomba) {
                     Enemy enemy = new Goomba(xLocation, yLocation, this.goombaLeft);
                     ((Goomba)enemy).setRightImage(goombaRight);
+                    if(activeMap == 1) {
+                        enemy.setVelX(0);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 2) {
+                        enemy.setVelX(3);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 3) {
+                        enemy.setVelX(6);
+                        enemy.setVelY(6);
+                    }
                     createdMap.addEnemy(enemy);
                 }
                 else if (currentPixel == koopa) {
                     Enemy enemy = new KoopaTroopa(xLocation, yLocation, this.koopaLeft);
                     ((KoopaTroopa)enemy).setRightImage(koopaRight);
+                    if(activeMap == 1) {
+                        enemy.setVelX(0);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 2) {
+                        enemy.setVelX(3);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 3) {
+                        enemy.setVelX(6);
+                        enemy.setVelY(6);
+                    }
                     createdMap.addEnemy(enemy);
                 }
                 else if (currentPixel == nemio) {
@@ -126,7 +150,7 @@ class MapCreator {
         return createdMap;
     }
 
-    Map createMap(String mapPath, double timeLimit, int remainingLives, int points, int coins) {
+    Map createMap(String mapPath, double timeLimit, int remainingLives, int points, int coins, int activeMap) {
         BufferedImage mapImage = imageLoader.loadImage(mapPath);
 
         if (mapImage == null) {
@@ -176,11 +200,35 @@ class MapCreator {
                 else if (currentPixel == goomba) {
                     Enemy enemy = new Goomba(xLocation, yLocation, this.goombaLeft);
                     ((Goomba)enemy).setRightImage(goombaRight);
+                    if(activeMap == 1) {
+                        enemy.setVelX(0);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 2) {
+                        enemy.setVelX(3);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 3) {
+                        enemy.setVelX(6);
+                        enemy.setVelY(6);
+                    }
                     createdMap.addEnemy(enemy);
                 }
                 else if (currentPixel == koopa) {
                     Enemy enemy = new KoopaTroopa(xLocation, yLocation, this.koopaLeft);
                     ((KoopaTroopa)enemy).setRightImage(koopaRight);
+                    if(activeMap == 1) {
+                        enemy.setVelX(0);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 2) {
+                        enemy.setVelX(3);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 3) {
+                        enemy.setVelX(6);
+                        enemy.setVelY(6);
+                    }
                     createdMap.addEnemy(enemy);
                 }
                 else if (currentPixel == nemio) {
@@ -220,4 +268,3 @@ class MapCreator {
 
 
 }
-
