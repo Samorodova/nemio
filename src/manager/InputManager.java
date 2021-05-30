@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-public class InputManager implements KeyListener, MouseListener{
+public class InputManager implements KeyListener{
 
     private GameEngine engine;
 
@@ -51,13 +51,6 @@ public class InputManager implements KeyListener, MouseListener{
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        if(engine.getGameStatus() == GameStatus.MAP_SELECTION){
-            engine.selectMapViaMouse();
-        }
-    }
-
-    @Override
     public void keyReleased(KeyEvent event) {
         if(event.getKeyCode() == KeyEvent.VK_RIGHT || event.getKeyCode() == KeyEvent.VK_LEFT)
             notifyInput(ButtonAction.ACTION_COMPLETED);
@@ -71,16 +64,5 @@ public class InputManager implements KeyListener, MouseListener{
     @Override
     public void keyTyped(KeyEvent arg0) {}
 
-    @Override
-    public void mouseClicked(MouseEvent e) {}
-
-    @Override
-    public void mouseReleased(MouseEvent e) {}
-
-    @Override
-    public void mouseEntered(MouseEvent e) {}
-
-    @Override
-    public void mouseExited(MouseEvent e) {}
 }
 

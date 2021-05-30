@@ -187,10 +187,6 @@ public class UIManager extends JPanel{
         g2.drawImage(selectIcon, 375, y_location, null);
     }
 
-    public String selectMapViaMouse(Point mouseLocation) {
-        return mapSelection.selectMap(mouseLocation);
-    }
-
     public String selectMapViaKeyboard(int index){
         return mapSelection.selectMap(index);
     }

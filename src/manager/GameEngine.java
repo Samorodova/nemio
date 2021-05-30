@@ -41,7 +41,6 @@ public class GameEngine implements Runnable {
         JFrame frame = new JFrame("Super Nemio Bros.");
         frame.add(uiManager);
         frame.addKeyListener(inputManager);
-        frame.addMouseListener(inputManager);
         frame.pack();
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -68,21 +67,6 @@ public class GameEngine implements Runnable {
     public void resetCamera(){
         camera = new Camera();
         soundManager.restartBackground();
-    }
-
-    public void selectMapViaMouse() {
-        String path = uiManager.selectMapViaMouse(uiManager.getMousePosition());
-        selMap = path;
-        if(selMap.equals("Map 1.png"))
-            activeMap = 1;
-        if(selMap.equals("Map 2.png"))
-            activeMap = 2;
-        if(selMap.equals("Map 3.png"))
-            activeMap = 3;
-
-        if (path != null) {
-            createMap(path, activeMap);
-        }
     }
 
     public void selectMapViaKeyboard(){
@@ -361,10 +345,6 @@ public class GameEngine implements Runnable {
 
     public void playCoin() {
         soundManager.playCoin();
-    }
-
-    public void playOneUp() {
-        soundManager.playOneUp();
     }
 
     public void playNemioDies() {

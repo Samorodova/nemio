@@ -74,12 +74,6 @@ public class SoundManager {
 
     }
 
-    public void playOneUp() {
-        Clip clip = getClip(loadAudio("oneUp"));
-        clip.start();
-
-    }
-
     public void playNemioDies() {
 
         Clip clip = getClip(loadAudio("nemioDies"));
