@@ -1,16 +1,20 @@
 package model.enemy;
 
+import manager.GameEngine;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class KoopaTroopa extends Enemy{
 
     private BufferedImage rightImage;
+    private GameEngine engine;
 
     public KoopaTroopa(double x, double y, BufferedImage style) {
         super(x, y, style);
         setVelX(0);
         setVelY(3);
+
     }
 
     @Override

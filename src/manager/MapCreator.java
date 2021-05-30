@@ -8,7 +8,7 @@ import model.Map;
 import model.enemy.Enemy;
 import model.enemy.Goomba;
 import model.enemy.KoopaTroopa;
-import model.hero.Mario;
+import model.hero.Nemio;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -29,23 +29,32 @@ class MapCreator {
         BufferedImage sprite = imageLoader.loadImage("/sprite.png");
 
         this.backgroundImage = imageLoader.loadImage("/background.png");
+        this.coin = imageLoader.loadImage("/dollar.png");
+        this.ordinaryBrick = imageLoader.loadImage("/water.png");
+        this.groundBrick = imageLoader.loadImage("/sand.png");
+        this.goombaLeft = imageLoader.loadImage("/shark.png");
+        this.goombaRight = imageLoader.loadImage("/sharkR.png");
+        this.pipe = imageLoader.loadImage("/reef.png");
+        this.koopaLeft = imageLoader.loadImage("/net.png");
+        this.koopaRight = imageLoader.loadImage("/net.png");
+
         this.superMushroom = imageLoader.getSubImage(sprite, 2, 5, 48, 48);
         this.oneUpMushroom= imageLoader.getSubImage(sprite, 3, 5, 48, 48);
         this.fireFlower= imageLoader.getSubImage(sprite, 4, 5, 48, 48);
-        this.coin = imageLoader.getSubImage(sprite, 1, 5, 48, 48);
-        this.ordinaryBrick = imageLoader.getSubImage(sprite, 1, 1, 48, 48);
+        // this.coin = imageLoader.getSubImage(sprite, 1, 5, 48, 48);
+        // this.ordinaryBrick = imageLoader.getSubImage(sprite, 1, 1, 48, 48);
         this.surpriseBrick = imageLoader.getSubImage(sprite, 2, 1, 48, 48);
-        this.groundBrick = imageLoader.getSubImage(sprite, 2, 2, 48, 48);
-        this.pipe = imageLoader.getSubImage(sprite, 3, 1, 96, 96);
-        this.goombaLeft = imageLoader.getSubImage(sprite, 2, 4, 48, 48);
-        this.goombaRight = imageLoader.getSubImage(sprite, 5, 4, 48, 48);
-        this.koopaLeft = imageLoader.getSubImage(sprite, 1, 3, 48, 64);
-        this.koopaRight = imageLoader.getSubImage(sprite, 4, 3, 48, 64);
+        // this.groundBrick = imageLoader.getSubImage(sprite, 2, 2, 48, 48);
+        // this.pipe = imageLoader.getSubImage(sprite, 3, 1, 96, 96);
+        // this.goombaLeft = imageLoader.getSubImage(sprite, 2, 4, 48, 48);
+        // this.goombaRight = imageLoader.getSubImage(sprite, 5, 4, 48, 48);
+        //this.koopaLeft = imageLoader.getSubImage(sprite, 1, 3, 48, 64);
+        //this.koopaRight = imageLoader.getSubImage(sprite, 4, 3, 48, 64);
         this.endFlag = imageLoader.getSubImage(sprite, 5, 1, 48, 48);
 
     }
 
-    Map createMap(String mapPath, double timeLimit) {
+    Map createMap(String mapPath, double timeLimit, int activeMap) {
         BufferedImage mapImage = imageLoader.loadImage(mapPath);
 
         if (mapImage == null) {
@@ -59,7 +68,7 @@ class MapCreator {
 
         int pixelMultiplier = 48;
 
-        int mario = new Color(160, 160, 160).getRGB();
+        int nemio = new Color(160, 160, 160).getRGB();
         int ordinaryBrick = new Color(0, 0, 255).getRGB();
         int surpriseBrick = new Color(255, 255, 0).getRGB();
         int groundBrick = new Color(255, 0, 0).getRGB();
@@ -95,16 +104,40 @@ class MapCreator {
                 else if (currentPixel == goomba) {
                     Enemy enemy = new Goomba(xLocation, yLocation, this.goombaLeft);
                     ((Goomba)enemy).setRightImage(goombaRight);
+                    if(activeMap == 1) {
+                        enemy.setVelX(0);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 2) {
+                        enemy.setVelX(3);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 3) {
+                        enemy.setVelX(6);
+                        enemy.setVelY(6);
+                    }
                     createdMap.addEnemy(enemy);
                 }
                 else if (currentPixel == koopa) {
                     Enemy enemy = new KoopaTroopa(xLocation, yLocation, this.koopaLeft);
                     ((KoopaTroopa)enemy).setRightImage(koopaRight);
+                    if(activeMap == 1) {
+                        enemy.setVelX(0);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 2) {
+                        enemy.setVelX(3);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 3) {
+                        enemy.setVelX(6);
+                        enemy.setVelY(6);
+                    }
                     createdMap.addEnemy(enemy);
                 }
-                else if (currentPixel == mario) {
-                    Mario marioObject = new Mario(xLocation, yLocation);//y+347
-                    createdMap.setMario(marioObject);
+                else if (currentPixel == nemio) {
+                    Nemio nemioObject = new Nemio(xLocation, yLocation);//y+347
+                    createdMap.setNemio(nemioObject);
                 }
                 else if(currentPixel == end){
                     EndFlag endPoint= new EndFlag(xLocation+24, yLocation, endFlag);
@@ -117,7 +150,7 @@ class MapCreator {
         return createdMap;
     }
 
-    Map createMap(String mapPath, double timeLimit, int remainingLives, int points, int coins) {
+    Map createMap(String mapPath, double timeLimit, int remainingLives, int points, int coins, int activeMap) {
         BufferedImage mapImage = imageLoader.loadImage(mapPath);
 
         if (mapImage == null) {
@@ -131,7 +164,7 @@ class MapCreator {
 
         int pixelMultiplier = 48;
 
-        int mario = new Color(160, 160, 160).getRGB();
+        int nemio = new Color(160, 160, 160).getRGB();
         int ordinaryBrick = new Color(0, 0, 255).getRGB();
         int surpriseBrick = new Color(255, 255, 0).getRGB();
         int groundBrick = new Color(255, 0, 0).getRGB();
@@ -167,16 +200,40 @@ class MapCreator {
                 else if (currentPixel == goomba) {
                     Enemy enemy = new Goomba(xLocation, yLocation, this.goombaLeft);
                     ((Goomba)enemy).setRightImage(goombaRight);
+                    if(activeMap == 1) {
+                        enemy.setVelX(0);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 2) {
+                        enemy.setVelX(3);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 3) {
+                        enemy.setVelX(6);
+                        enemy.setVelY(6);
+                    }
                     createdMap.addEnemy(enemy);
                 }
                 else if (currentPixel == koopa) {
                     Enemy enemy = new KoopaTroopa(xLocation, yLocation, this.koopaLeft);
                     ((KoopaTroopa)enemy).setRightImage(koopaRight);
+                    if(activeMap == 1) {
+                        enemy.setVelX(0);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 2) {
+                        enemy.setVelX(3);
+                        enemy.setVelY(3);
+                    }
+                    else if(activeMap == 3) {
+                        enemy.setVelX(6);
+                        enemy.setVelY(6);
+                    }
                     createdMap.addEnemy(enemy);
                 }
-                else if (currentPixel == mario) {
-                    Mario marioObject = new Mario(xLocation, yLocation, remainingLives, points, coins);//y+347
-                    createdMap.setMario(marioObject);
+                else if (currentPixel == nemio) {
+                    Nemio nemioObject = new Nemio(xLocation, yLocation, remainingLives, points, coins);//y+347
+                    createdMap.setNemio(nemioObject);
                 }
                 else if(currentPixel == end){
                     EndFlag endPoint= new EndFlag(xLocation+24, yLocation, endFlag);
@@ -211,4 +268,3 @@ class MapCreator {
 
 
 }
-

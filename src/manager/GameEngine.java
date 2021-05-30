@@ -1,6 +1,6 @@
 package manager;
 
-import model.hero.Mario;
+import model.hero.Nemio;
 import view.ImageLoader;
 import view.StartScreenSelection;
 import view.UIManager;
@@ -23,6 +23,7 @@ public class GameEngine implements Runnable {
     private StartScreenSelection startScreenSelection = StartScreenSelection.START_GAME;
     private int selectedMap = 0;
     private int activeMap = 1;
+    private String selMap;
 
     private GameEngine() {
         init();
@@ -37,7 +38,7 @@ public class GameEngine implements Runnable {
         soundManager = new SoundManager();
         mapManager = new MapManager();
 
-        JFrame frame = new JFrame("Super Mario Bros.");
+        JFrame frame = new JFrame("Super Nemio Bros.");
         frame.add(uiManager);
         frame.addKeyListener(inputManager);
         frame.addMouseListener(inputManager);
@@ -71,22 +72,34 @@ public class GameEngine implements Runnable {
 
     public void selectMapViaMouse() {
         String path = uiManager.selectMapViaMouse(uiManager.getMousePosition());
-        if (path != null) {
-            createMap(path);
-        }
-    }
+        selMap = path;
+        if(selMap.equals("Map 1.png"))
+            activeMap = 1;
+        if(selMap.equals("Map 2.png"))
+            activeMap = 2;
+        if(selMap.equals("Map 3.png"))
+            activeMap = 3;
 
-    public void selectSecondMap() {
-        String path = uiManager.selectMapViaKeyboard(1);
         if (path != null) {
-            createMap(path);
+            createMap(path, activeMap);
         }
     }
 
     public void selectMapViaKeyboard(){
         String path = uiManager.selectMapViaKeyboard(selectedMap);
+        selMap = path;
+        if(selMap.equals("Map 1.png")) {
+            activeMap = 1;
+        }
+        if(selMap.equals("Map 2.png")) {
+            activeMap = 2;
+        }
+        if(selMap.equals("Map 3.png")) {
+            activeMap = 3;
+        }
+
         if (path != null) {
-            createMap(path);
+            createMap(path, activeMap);
         }
     }
 
@@ -94,8 +107,8 @@ public class GameEngine implements Runnable {
         selectedMap = uiManager.changeSelectedMap(selectedMap, up);
     }
 
-    private void createMap(String path) {
-        boolean loaded = mapManager.createMap(imageLoader, path);
+    private void createMap(String path, int activeMap) {
+        boolean loaded = mapManager.createMap(imageLoader, path, activeMap);
         if(loaded){
             setGameStatus(GameStatus.RUNNING);
             soundManager.restartBackground();
@@ -105,8 +118,8 @@ public class GameEngine implements Runnable {
             setGameStatus(GameStatus.START_SCREEN);
     }
 
-    private  void createNotFirstMap(String path) {
-        boolean loaded = mapManager.createNotFirstMap(imageLoader, path);
+    private  void createNotFirstMap(String path, int activeMap) {
+        boolean loaded = mapManager.createNotFirstMap(imageLoader, path, activeMap);
         if(loaded){
             setGameStatus(GameStatus.RUNNING);
             soundManager.restartBackground();
@@ -168,10 +181,10 @@ public class GameEngine implements Runnable {
             mapManager.acquirePoints(missionPassed);
             //setGameStatus(GameStatus.MISSION_PASSED);
         } else if(mapManager.endLevel()) {
-           // setGameStatus(GameStatus.MISSION_PASSED);
+            // setGameStatus(GameStatus.MISSION_PASSED);
             setGameStatus(GameStatus.MAP_PASSED);
             activeMap++;
-          //  resetCamera();
+            //  resetCamera();
             //createMap("Map 2.png");
             resetMap();
         }
@@ -183,7 +196,8 @@ public class GameEngine implements Runnable {
             if(getActiveMap() <= uiManager.getLastMap()) {
                 resetCamera();
                 //createMap("Map " + activeMap + ".png");
-                createNotFirstMap("Map " + activeMap + ".png");
+                createNotFirstMap("Map " + activeMap + ".png", activeMap);
+
 
             }
             else if(getActiveMap() > uiManager.getLastMap()) {
@@ -193,12 +207,12 @@ public class GameEngine implements Runnable {
     }
 
     private void updateCamera() {
-        Mario mario = mapManager.getMario();
-        double marioVelocityX = mario.getVelX();
+        Nemio nemio = mapManager.getNemio();
+        double nemioVelocityX = nemio.getVelX();
         double shiftAmount = 0;
 
-        if (marioVelocityX > 0 && mario.getX() - 600 > camera.getX()) {
-            shiftAmount = marioVelocityX;
+        if (nemioVelocityX > 0 && nemio.getX() - 600 > camera.getX()) {
+            shiftAmount = nemioVelocityX;
         }
 
         camera.moveCam(shiftAmount, 0);
@@ -209,7 +223,7 @@ public class GameEngine implements Runnable {
     }
 
     private void checkCollisions() {
-        mapManager.checkCollisions(this);
+        mapManager.checkCollisions(this, activeMap);
     }
 
     public void receiveInput(ButtonAction input) {
@@ -238,17 +252,17 @@ public class GameEngine implements Runnable {
                 changeSelectedMap(false);
             }
         } else if (gameStatus == GameStatus.RUNNING) {
-            Mario mario = mapManager.getMario();
+            Nemio nemio = mapManager.getNemio();
             if (input == ButtonAction.GO_UP) {
-                mario.jump(this,true);
+                nemio.jump(this,true);
             }else if (input == ButtonAction.GO_DOWN) {
-                mario.jump(this,false);
+                nemio.jump(this,false);
             } else if (input == ButtonAction.M_RIGHT) {
-                mario.move(true, camera);
+                nemio.move(true, camera);
             } else if (input == ButtonAction.M_LEFT) {
-                mario.move(false, camera);
+                nemio.move(false, camera);
             } else if (input == ButtonAction.ACTION_COMPLETED) {
-                mario.setVelX(0);
+                nemio.setVelX(0);
             } else if (input == ButtonAction.FIRE) {
                 mapManager.fire(this);
             } else if (input == ButtonAction.PAUSE_RESUME) {
@@ -359,8 +373,8 @@ public class GameEngine implements Runnable {
         soundManager.playSuperMushroom();
     }
 
-    public void playMarioDies() {
-        soundManager.playMarioDies();
+    public void playNemioDies() {
+        soundManager.playNemioDies();
     }
 
     public void playJump() {
@@ -393,4 +407,3 @@ public class GameEngine implements Runnable {
         return mapManager.getRemainingTime();
     }
 }
-

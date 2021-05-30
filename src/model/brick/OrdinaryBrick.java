@@ -36,7 +36,7 @@ public class OrdinaryBrick extends Brick {
     @Override
     public Prize reveal(GameEngine engine){
         MapManager manager = engine.getMapManager();
-        if(!manager.getMario().isSuper())
+        if(!manager.getNemio().isSuper())
             return null;
 
         breaking = true;

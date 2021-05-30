@@ -100,7 +100,7 @@ public class UIManager extends JPanel{
 
     private void drawRemainingTime(Graphics2D g2) {
         g2.setFont(gameFont.deriveFont(25f));
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.BLACK);
         String displayedStr = "TIME: " + engine.getRemainingTime();
         g2.drawString(displayedStr, 750, 50);
     }
@@ -149,7 +149,7 @@ public class UIManager extends JPanel{
 
     private void drawAcquiredCoins(Graphics2D g2) {
         g2.setFont(gameFont.deriveFont(30f));
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.BLACK);
         String displayedStr = "" + engine.getCoins();
         g2.drawImage(coinIcon, getWidth()-115, 10, null);
         g2.drawString(displayedStr, getWidth()-65, 50);
@@ -157,7 +157,7 @@ public class UIManager extends JPanel{
 
     private void drawRemainingLives(Graphics2D g2) {
         g2.setFont(gameFont.deriveFont(30f));
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.BLACK);
         String displayedStr = "" + engine.getRemainingLives();
         g2.drawImage(heartIcon, 50, 10, null);
         g2.drawString(displayedStr, 100, 50);
@@ -165,7 +165,7 @@ public class UIManager extends JPanel{
 
     private void drawPoints(Graphics2D g2){
         g2.setFont(gameFont.deriveFont(25f));
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.BLACK);
         String displayedStr = "Points: " + engine.getScore();
         int stringLength = g2.getFontMetrics().stringWidth(displayedStr);;
         //g2.drawImage(coinIcon, 50, 10, null);

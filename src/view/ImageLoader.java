@@ -7,11 +7,11 @@ import java.io.IOException;
 
 public class ImageLoader {
 
-    private BufferedImage marioForms;
+    private BufferedImage nemioForms;
     private BufferedImage brickAnimation;
 
     public ImageLoader(){
-        marioForms = loadImage("/mario-forms.png");
+        nemioForms = loadImage("/nemio-forms.png");
         brickAnimation = loadImage("/brick-animation.png");
     }
 
@@ -46,46 +46,48 @@ public class ImageLoader {
         return image.getSubimage((col-1)*48, (row-1)*48, w, h);
     }
 
-    public BufferedImage[] getLeftFrames(int marioForm){
+    public BufferedImage[] getLeftFrames(int nemioForm){
         BufferedImage[] leftFrames = new BufferedImage[5];
         int col = 1;
         int width = 52, height = 48;
 
-        if(marioForm == 1) { //super mario
+        if(nemioForm == 1) { //super nemio
             col = 4;
             width = 48;
             height = 96;
         }
-        else if(marioForm == 2){ //fire mario
+        else if(nemioForm == 2){ //fire nemio
             col = 7;
             width = 48;
             height = 96;
         }
 
         for(int i = 0; i < 5; i++){
-            leftFrames[i] = marioForms.getSubimage((col-1)*width, (i)*height, width, height);
+            //leftFrames[i] = nemioForms.getSubimage((col-1)*width, (i)*height, width, height);
+            leftFrames[i] = loadImage("/clown-fishL.png");
         }
         return leftFrames;
     }
 
-    public BufferedImage[] getRightFrames(int marioForm){
+    public BufferedImage[] getRightFrames(int nemioForm){
         BufferedImage[] rightFrames = new BufferedImage[5];
         int col = 2;
         int width = 52, height = 48;
 
-        if(marioForm == 1) { //super mario
+        if(nemioForm == 1) { //super nemio
             col = 5;
             width = 48;
             height = 96;
         }
-        else if(marioForm == 2){ //fire mario
+        else if(nemioForm == 2){ //fire nemio
             col = 8;
             width = 48;
             height = 96;
         }
 
         for(int i = 0; i < 5; i++){
-            rightFrames[i] = marioForms.getSubimage((col-1)*width, (i)*height, width, height);
+            // rightFrames[i] = nemioForms.getSubimage((col-1)*width, (i)*height, width, height);
+            rightFrames[i] = loadImage("/clown-fish.png");
         }
         return rightFrames;
     }
@@ -98,4 +100,3 @@ public class ImageLoader {
         return frames;
     }
 }
-
