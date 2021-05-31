@@ -90,7 +90,8 @@ public class MapManager {
     }
 
     public boolean endLevel(){
-        return getNemio().getX() >= map.getEndPoint().getX() + 320;
+        //return getNemio().getX() >= map.getEndPoint().getX() + 320;
+        return getNemio().getX() >= map.getEndPoint().getX();
     }
 
     public void checkCollisions(GameEngine engine, int activeMap) {

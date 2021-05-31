@@ -31,8 +31,8 @@ class MapCreator {
         this.backgroundImage = imageLoader.loadImage("/background.png");
         this.coin = imageLoader.loadImage("/dollar.png");
         this.food = imageLoader.loadImage("/food.png");
-        this.foam = imageLoader.loadImage("/foam.png");
-        this.ordinaryBrick = imageLoader.loadImage("/water.png");
+        this.foam = imageLoader.loadImage("/bubbles.png");
+        this.ordinaryBrick = imageLoader.loadImage("/bubbles.png");
         this.groundBrick = imageLoader.loadImage("/sand.png");
         this.sharkLeft = imageLoader.loadImage("/shark.png");
         this.sharkRight = imageLoader.loadImage("/sharkR.png");
@@ -139,7 +139,7 @@ class MapCreator {
                     createdMap.setNemio(nemioObject);
                 }
                 else if(currentPixel == end){
-                    this.endFlag = imageLoader.loadImage("/dora.png");
+                    if (activeMap == 3) this.endFlag = imageLoader.loadImage("/dora.png");
                     EndFlag endPoint= new EndFlag(xLocation+24, yLocation, endFlag);
                     createdMap.setEndPoint(endPoint);
                 }
