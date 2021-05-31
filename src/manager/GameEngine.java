@@ -342,6 +342,10 @@ public class GameEngine implements Runnable {
         soundManager.playCoin();
     }
 
+    public void playFood() {
+        soundManager.playFood();
+    }
+
     public void playNemioDies() {
         soundManager.playNemioDies();
     }

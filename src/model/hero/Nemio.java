@@ -145,6 +145,5 @@ public class Nemio extends GameObject{
         setX(50);
         setJumpingUp(false);
         setJumpingDown(false);
-        setStanding(true);
     }
 }

@@ -61,6 +61,12 @@ public class SoundManager {
 
     }
 
+    public void playFood() {
+        Clip clip = getClip(loadAudio("food"));
+        clip.start();
+
+    }
+
 
     public void playGameOver() {
         Clip clip = getClip(loadAudio("gameOver"));

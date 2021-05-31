@@ -21,7 +21,7 @@ public class Food extends Brick{
         if(!acquired){
             acquired = true;
             nemio.acquirePoints(point);
-            engine.playCoin();
+            engine.playFood();
         }
     }
 }

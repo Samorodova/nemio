@@ -6,16 +6,11 @@ import java.awt.image.BufferedImage;
 public abstract class GameObject {
 
     private double x, y;
-
     private double velX, velY;
-
     private Dimension dimension;
-
     private BufferedImage style;
-
     private double gravityAcc;
-
-    private boolean falling, jumpingUp, jumpingDown, standing;
+    private boolean falling, jumpingUp, jumpingDown;
 
     public GameObject(double x, double y, BufferedImage style){
         setLocation(x, y);
@@ -161,10 +156,6 @@ public abstract class GameObject {
 
     public void setFalling(boolean falling) {
         this.falling = falling;
-    }
-
-    public void setStanding(boolean standing) {
-        this.standing = standing;
     }
 
     public boolean isJumping() {
