@@ -3,6 +3,7 @@ package manager;
 import model.GameObject;
 import model.Map;
 import model.brick.Brick;
+import model.brick.Foam;
 import model.brick.Food;
 import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
@@ -176,6 +177,7 @@ public class MapManager {
         Nemio nemio = getNemio();
         ArrayList<Brick> bricks = map.getAllBricks();
         ArrayList<Enemy> enemies = map.getEnemies();
+        ArrayList<Foam> foams = map.getFoamBricks();
         ArrayList<GameObject> toBeRemoved = new ArrayList<>();
 
         Rectangle nemioTopBounds = nemio.getTopBounds();
@@ -189,6 +191,14 @@ public class MapManager {
                     map.addRevealedPrize(prize);
             }
         }
+
+        /*for (Foam foam : foams) {
+            Rectangle brickBottomBounds = foam.getBottomBounds();
+            if (nemioTopBounds.intersects(brickBottomBounds)) {
+                nemio.setVelY(0);
+                nemio.setY(foam.getY() + foam.getDimension().height);
+            }
+        }*/
 
         boolean nemioDies = false;
 

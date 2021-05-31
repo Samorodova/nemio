@@ -1,6 +1,7 @@
 package model;
 
 import model.brick.Brick;
+import model.brick.Foam;
 import model.brick.Food;
 import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
@@ -24,6 +25,7 @@ public class Map {
     private ArrayList<Prize> revealedPrizes = new ArrayList<>();
     private ArrayList<Brick> revealedBricks = new ArrayList<>();
     private ArrayList<Food> foodBricks = new ArrayList<>();
+    private ArrayList<Foam> foamBricks = new ArrayList<>();
     private EndFlag endPoint;
     private BufferedImage backgroundImage;
     private double bottomBorder = 720 - 96;
@@ -55,6 +57,10 @@ public class Map {
         return foodBricks;
     }
 
+    public ArrayList<Foam> getFoamBricks() {
+        return foamBricks;
+    }
+
     public ArrayList<Prize> getRevealedPrizes() {
         return revealedPrizes;
     }
@@ -80,6 +86,10 @@ public class Map {
 
     public void addFoodBrick(Food food) {
         this.foodBricks.add(food);
+    }
+
+    public void addFoamBrick(Foam foam) {
+        this.foamBricks.add(foam);
     }
 
     public void addEnemy(Enemy enemy) {
@@ -121,6 +131,11 @@ public class Map {
         }
 
         for(Brick brick : foodBricks){
+            if(brick != null)
+                brick.draw(g2);
+        }
+
+        for(Brick brick : foamBricks){
             if(brick != null)
                 brick.draw(g2);
         }

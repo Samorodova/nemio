@@ -18,7 +18,7 @@ class MapCreator {
     private ImageLoader imageLoader;
 
     private BufferedImage backgroundImage;
-    private BufferedImage coin, food;
+    private BufferedImage coin, food, foam;
     private BufferedImage ordinaryBrick, surpriseBrick, groundBrick, pipe;
     private BufferedImage sharkLeft, sharkRight, netLeft, netRight, endFlag;
 
@@ -31,6 +31,7 @@ class MapCreator {
         this.backgroundImage = imageLoader.loadImage("/background.png");
         this.coin = imageLoader.loadImage("/dollar.png");
         this.food = imageLoader.loadImage("/food.png");
+        this.foam = imageLoader.loadImage("/foam.png");
         this.ordinaryBrick = imageLoader.loadImage("/water.png");
         this.groundBrick = imageLoader.loadImage("/sand.png");
         this.sharkLeft = imageLoader.loadImage("/shark.png");
@@ -65,6 +66,7 @@ class MapCreator {
         int net = new Color(255, 0, 255).getRGB();
         int end = new Color(160, 0, 160).getRGB();
         int plancton = new Color(128, 128, 128).getRGB();
+        int foam = new Color(255, 255, 255).getRGB();
 
         for (int x = 0; x < mapImage.getWidth(); x++) {
             for (int y = 0; y < mapImage.getHeight(); y++) {
@@ -94,6 +96,10 @@ class MapCreator {
                     Food food = new Food(xLocation, yLocation, this.food);
                     createdMap.addFoodBrick(food);
                 }
+                /*else if (currentPixel == foam) {
+                    Foam foams = new Foam(xLocation, yLocation, this.foam);
+                    createdMap.addFoamBrick(foams);
+                }*/
                 else if (currentPixel == shark) {
                     Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
                     ((Shark)enemy).setRightImage(sharkRight);
@@ -166,6 +172,7 @@ class MapCreator {
         int net = new Color(255, 0, 255).getRGB();
         int end = new Color(160, 0, 160).getRGB();
         int plancton = new Color(128, 128, 128).getRGB();
+        int foam = new Color(255, 255, 255).getRGB();
 
         for (int x = 0; x < mapImage.getWidth(); x++) {
             for (int y = 0; y < mapImage.getHeight(); y++) {
@@ -195,6 +202,10 @@ class MapCreator {
                     Food food = new Food(xLocation, yLocation, this.food);
                     createdMap.addFoodBrick(food);
                 }
+                /*else if (currentPixel == foam) {
+                    Foam foams = new Foam(xLocation, yLocation, this.foam);
+                    createdMap.addFoamBrick(foams);
+                }*/
                 else if (currentPixel == shark) {
                     Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
                     ((Shark)enemy).setRightImage(sharkRight);
