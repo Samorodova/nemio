@@ -56,16 +56,12 @@ public class Nemio extends GameObject{
 
     @Override
     public void draw(Graphics g) {
-        boolean movingInX = (getVelX() != 0);
-        boolean movingInY = (getVelY() != 0);
-
         ImageLoader imageLoader = new ImageLoader();
         if(toRight){
             setStyle(imageLoader.loadImage("/clown-fish.png"));
         }
         else
             setStyle(imageLoader.loadImage("/clown-fishL.png"));
-
         super.draw(g);
     }
 

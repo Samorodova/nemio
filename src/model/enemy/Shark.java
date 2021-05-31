@@ -9,9 +9,6 @@ import java.awt.image.BufferedImage;
 public class Shark extends Enemy{
 
     private BufferedImage rightImage;
-    private UIManager uiManager;
-    private int selectedMap;
-
 
     public Shark(double x, double y, BufferedImage style) {
         super(x, y, style);

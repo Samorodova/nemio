@@ -12,14 +12,10 @@ import java.awt.image.BufferedImage;
 
 public class OrdinaryBrick extends Brick {
 
-    private boolean breaking;
-    private int frames;
-
     public OrdinaryBrick(double x, double y, BufferedImage style){
         super(x, y, style);
         setBreakable(true);
         setEmpty(true);
-        breaking = false;
     }
 
 
