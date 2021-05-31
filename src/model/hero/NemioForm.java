@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class NemioForm {
 
-    public static final int SMALL = 0, SUPER = 1, FIRE = 2;
+    public static final int SMALL = 0;
 
     private Animation animation;
 

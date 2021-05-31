@@ -42,9 +42,6 @@ public class InputManager implements KeyListener{
                 currentAction = ButtonAction.GO_TO_START_SCREEN;
 
         }
-        else if (keyCode == KeyEvent.VK_SPACE){
-            currentAction = ButtonAction.FIRE;
-        }
 
 
         notifyInput(currentAction);
