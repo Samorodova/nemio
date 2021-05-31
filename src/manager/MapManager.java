@@ -192,13 +192,13 @@ public class MapManager {
             }
         }
 
-        /*for (Foam foam : foams) {
+        for (Foam foam : foams) {
             Rectangle brickBottomBounds = foam.getBottomBounds();
             if (nemioTopBounds.intersects(brickBottomBounds)) {
                 nemio.setVelY(0);
                 nemio.setY(foam.getY() + foam.getDimension().height);
             }
-        }*/
+        }
 
         boolean nemioDies = false;
 

@@ -96,10 +96,10 @@ class MapCreator {
                     Food food = new Food(xLocation, yLocation, this.food);
                     createdMap.addFoodBrick(food);
                 }
-                /*else if (currentPixel == foam) {
+                else if (currentPixel == foam) {
                     Foam foams = new Foam(xLocation, yLocation, this.foam);
                     createdMap.addFoamBrick(foams);
-                }*/
+                }
                 else if (currentPixel == shark) {
                     Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
                     ((Shark)enemy).setRightImage(sharkRight);
@@ -203,10 +203,10 @@ class MapCreator {
                     Food food = new Food(xLocation, yLocation, this.food);
                     createdMap.addFoodBrick(food);
                 }
-                /*else if (currentPixel == foam) {
+                else if (currentPixel == foam) {
                     Foam foams = new Foam(xLocation, yLocation, this.foam);
                     createdMap.addFoamBrick(foams);
-                }*/
+                }
                 else if (currentPixel == shark) {
                     Enemy enemy = new Shark(xLocation, yLocation, this.sharkLeft);
                     ((Shark)enemy).setRightImage(sharkRight);

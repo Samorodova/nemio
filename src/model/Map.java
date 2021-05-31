@@ -70,6 +70,7 @@ public class Map {
 
         allBricks.addAll(bricks);
         allBricks.addAll(groundBricks);
+        allBricks.addAll(foamBricks);
 
         return allBricks;
     }

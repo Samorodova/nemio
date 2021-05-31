@@ -14,7 +14,7 @@ public class Food extends Brick{
         super(x, y, style);
         setBreakable(false);
         setEmpty(true);
-        setDimension(96, 96);
+        setDimension(48, 48);
     }
 
     public void onTouch(Nemio nemio, GameEngine engine) {
