@@ -163,13 +163,9 @@ public class GameEngine implements Runnable {
         int missionPassed = passMission();
         if(missionPassed > -1){
             mapManager.acquirePoints(missionPassed);
-            //setGameStatus(GameStatus.MISSION_PASSED);
         } else if(mapManager.endLevel()) {
-            // setGameStatus(GameStatus.MISSION_PASSED);
             setGameStatus(GameStatus.MAP_PASSED);
             activeMap++;
-            //  resetCamera();
-            //createMap("Map 2.png");
             resetMap();
         }
 
@@ -179,7 +175,6 @@ public class GameEngine implements Runnable {
         if(getGameStatus() == GameStatus.MAP_PASSED) {
             if(getActiveMap() <= uiManager.getLastMap()) {
                 resetCamera();
-                //createMap("Map " + activeMap + ".png");
                 createNotFirstMap("Map " + activeMap + ".png", activeMap);
 
 
