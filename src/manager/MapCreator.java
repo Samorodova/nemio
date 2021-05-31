@@ -139,6 +139,7 @@ class MapCreator {
                     createdMap.setNemio(nemioObject);
                 }
                 else if(currentPixel == end){
+                    this.endFlag = imageLoader.loadImage("/dora.png");
                     EndFlag endPoint= new EndFlag(xLocation+24, yLocation, endFlag);
                     createdMap.setEndPoint(endPoint);
                 }
