@@ -3,7 +3,6 @@ package model;
 import model.brick.Brick;
 import model.brick.Foam;
 import model.brick.Food;
-import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
 import model.hero.Nemio;
 import model.prize.BoostItem;
@@ -13,7 +12,6 @@ import model.prize.Prize;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Map {
 

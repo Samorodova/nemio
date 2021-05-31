@@ -76,7 +76,7 @@ class MapCreator {
                 int yLocation = y*pixelMultiplier;
 
                 if (currentPixel == ordinaryBrick) {
-                    Brick brick = new OrdinaryBrick(xLocation, yLocation, this.ordinaryBrick);
+                    Brick brick = new BubbleBrick(xLocation, yLocation, this.ordinaryBrick);
                     createdMap.addBrick(brick);
                 }
                 else if (currentPixel == surpriseBrick) {
@@ -183,7 +183,7 @@ class MapCreator {
                 int yLocation = y*pixelMultiplier;
 
                 if (currentPixel == ordinaryBrick) {
-                    Brick brick = new OrdinaryBrick(xLocation, yLocation, this.ordinaryBrick);
+                    Brick brick = new BubbleBrick(xLocation, yLocation, this.ordinaryBrick);
                     createdMap.addBrick(brick);
                 }
                 else if (currentPixel == coinBrick) {

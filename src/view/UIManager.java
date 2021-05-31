@@ -32,7 +32,6 @@ public class UIManager extends JPanel{
 
         mapSelection = new MapSelection();
 
-        BufferedImage sprite = loader.loadImage("/sprite.png");
         this.heartIcon = loader.loadImage("/heart-icon.png");
         this.coinIcon = loader.loadImage("/dollar.png");
         this.selectIcon = loader.loadImage("/squid.png");

@@ -5,7 +5,6 @@ import model.Map;
 import model.brick.Brick;
 import model.brick.Foam;
 import model.brick.Food;
-import model.brick.OrdinaryBrick;
 import model.enemy.Enemy;
 import model.hero.Nemio;
 import model.prize.BoostItem;
@@ -189,7 +188,7 @@ public class MapManager {
                 nemio.setY(brick.getY() + brick.getDimension().height);
                 Prize prize = brick.reveal(engine);
                 if(prize != null)
-                    map.addRevealedPrize(prize);
+                map.addRevealedPrize(prize);
             }
         }
 

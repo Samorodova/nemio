@@ -31,7 +31,7 @@ public class GameEngine implements Runnable {
 
     private void init() {
         imageLoader = new ImageLoader();
-        InputManager inputManager = new InputManager(this);
+        ActionManager inputManager = new ActionManager(this);
         gameStatus = GameStatus.START_SCREEN;
         camera = new Camera();
         uiManager = new UIManager(this, WIDTH, HEIGHT);
@@ -278,10 +278,6 @@ public class GameEngine implements Runnable {
             setGameStatus(GameStatus.RUNNING);
             soundManager.resumeBackground();
         }
-    }
-
-    public void shakeCamera(){
-        camera.shakeCamera();
     }
 
     private boolean isGameOver() {

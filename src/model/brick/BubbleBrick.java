@@ -10,9 +10,9 @@ import view.ImageLoader;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class OrdinaryBrick extends Brick {
+public class BubbleBrick extends Brick {
 
-    public OrdinaryBrick(double x, double y, BufferedImage style){
+    public BubbleBrick(double x, double y, BufferedImage style){
         super(x, y, style);
         setBreakable(true);
         setEmpty(true);

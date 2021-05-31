@@ -6,11 +6,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-public class InputManager implements KeyListener{
+public class ActionManager implements KeyListener{
 
     private GameEngine engine;
 
-    InputManager(GameEngine engine) {
+    ActionManager(GameEngine engine) {
         this.engine = engine; }
 
     @Override

@@ -14,7 +14,6 @@ public class Nemio extends GameObject{
     private int remainingLives;
     private int coins;
     private int points;
-    private double invincibilityTimer;
     private boolean toRight = true;
     private boolean toUp = true;
     private boolean toBottom = true;
@@ -26,7 +25,6 @@ public class Nemio extends GameObject{
         remainingLives = 3;
         points = 0;
         coins = 0;
-        invincibilityTimer = 0;
 
         ImageLoader imageLoader = new ImageLoader();
 
@@ -44,7 +42,6 @@ public class Nemio extends GameObject{
         this.remainingLives = remainingLives;
         this.points = points;
         this.coins = coins;
-        invincibilityTimer = 0;
 
         ImageLoader imageLoader = new ImageLoader();
         if(toRight){
