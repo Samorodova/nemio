@@ -159,28 +159,6 @@ public class Map {
             enemy.updateEnemiesLocation();
         }
 
-        for(Iterator<Prize> prizeIterator = revealedPrizes.iterator(); prizeIterator.hasNext();){
-            Prize prize = prizeIterator.next();
-            if(prize instanceof Coin){
-                ((Coin) prize).updateLocation();
-                if(((Coin) prize).getRevealBoundary() > ((Coin) prize).getY()){
-                    prizeIterator.remove();
-                }
-            }
-            else if(prize instanceof BoostItem){
-                ((BoostItem) prize).updateLocation();
-            }
-        }
-
-        for(Iterator<Brick> brickIterator = revealedBricks.iterator(); brickIterator.hasNext();){
-            OrdinaryBrick brick = (OrdinaryBrick)brickIterator.next();
-            brick.animate();
-            if(brick.getFrames() < 0){
-                bricks.remove(brick);
-                brickIterator.remove();
-            }
-        }
-
         endPoint.updateLocation();
     }
 
@@ -202,10 +180,6 @@ public class Map {
 
     public EndFlag getEndPoint() {
         return endPoint;
-    }
-
-    public void addRevealedBrick(OrdinaryBrick ordinaryBrick) {
-        revealedBricks.add(ordinaryBrick);
     }
 
     public void removeEnemy(Enemy object) {

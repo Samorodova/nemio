@@ -2,6 +2,7 @@ package model;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public abstract class GameObject {
 
@@ -28,7 +29,7 @@ public abstract class GameObject {
         falling = true;
     }
 
-    public void draw(Graphics g) {
+    public void draw(Graphics g){
         BufferedImage style = getStyle();
 
         if(style != null){

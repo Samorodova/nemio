@@ -58,19 +58,6 @@ public class MapSelection {
         return items;
     }
 
-    public String selectMap(Point mouseLocation) {
-        for(MapSelectionItem item : mapSelectionItems) {
-            Dimension dimension = item.getDimension();
-            Point location = item.getLocation();
-            boolean inX = location.x <= mouseLocation.x && location.x + dimension.width >= mouseLocation.x;
-            boolean inY = location.y >= mouseLocation.y && location.y - dimension.height <= mouseLocation.y;
-            if(inX && inY){
-                return item.getName();
-            }
-        }
-        return null;
-    }
-
     public String selectMap(int index){
         if(index < mapSelectionItems.length && index > -1)
             return mapSelectionItems[index].getName();

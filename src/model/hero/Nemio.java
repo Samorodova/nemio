@@ -2,12 +2,12 @@ package model.hero;
 
 import manager.Camera;
 import manager.GameEngine;
-import view.Animation;
 import model.GameObject;
 import view.ImageLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Nemio extends GameObject{
 
@@ -15,7 +15,6 @@ public class Nemio extends GameObject{
     private int coins;
     private int points;
     private double invincibilityTimer;
-    private NemioForm nemioForm;
     private boolean toRight = true;
     private boolean toUp = true;
     private boolean toBottom = true;
@@ -30,12 +29,12 @@ public class Nemio extends GameObject{
         invincibilityTimer = 0;
 
         ImageLoader imageLoader = new ImageLoader();
-        BufferedImage[] leftFrames = imageLoader.getLeftFrames(NemioForm.SMALL);
-        BufferedImage[] rightFrames = imageLoader.getRightFrames(NemioForm.SMALL);
 
-        Animation animation = new Animation(leftFrames, rightFrames);
-        nemioForm = new NemioForm(animation);
-        setStyle(nemioForm.getCurrentStyle(toRight, false, false));
+        if(toRight){
+            setStyle(imageLoader.loadImage("/clown-fish.png"));
+        }
+        else
+            setStyle(imageLoader.loadImage("/clown-fishL.png"));
     }
 
     public Nemio(double x, double y, int remainingLives, int points, int coins) {
@@ -48,20 +47,24 @@ public class Nemio extends GameObject{
         invincibilityTimer = 0;
 
         ImageLoader imageLoader = new ImageLoader();
-        BufferedImage[] leftFrames = imageLoader.getLeftFrames(NemioForm.SMALL);
-        BufferedImage[] rightFrames = imageLoader.getRightFrames(NemioForm.SMALL);
-
-        Animation animation = new Animation(leftFrames, rightFrames);
-        nemioForm = new NemioForm(animation);
-        setStyle(nemioForm.getCurrentStyle(toRight, false, false));
+        if(toRight){
+            setStyle(imageLoader.loadImage("/clown-fish.png"));
+        }
+        else
+            setStyle(imageLoader.loadImage("/clown-fishL.png"));
     }
 
     @Override
-    public void draw(Graphics g){
+    public void draw(Graphics g) {
         boolean movingInX = (getVelX() != 0);
         boolean movingInY = (getVelY() != 0);
 
-        setStyle(nemioForm.getCurrentStyle(toRight, movingInX, movingInY));
+        ImageLoader imageLoader = new ImageLoader();
+        if(toRight){
+            setStyle(imageLoader.loadImage("/clown-fish.png"));
+        }
+        else
+            setStyle(imageLoader.loadImage("/clown-fishL.png"));
 
         super.draw(g);
     }
@@ -116,14 +119,6 @@ public class Nemio extends GameObject{
 
     public int getCoins() {
         return coins;
-    }
-
-    public NemioForm getNemioForm() {
-        return nemioForm;
-    }
-
-    public void setNemioForm(NemioForm nemioForm) {
-        this.nemioForm = nemioForm;
     }
 
 
