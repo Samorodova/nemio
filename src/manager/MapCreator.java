@@ -235,8 +235,8 @@ class MapCreator {
                         enemy.setVelY(3);
                     }
                     else if(activeMap == 3) {
-                        enemy.setVelX(6);
-                        enemy.setVelY(6);
+                        enemy.setVelX(5);
+                        enemy.setVelY(5);
                     }
                     createdMap.addEnemy(enemy);
                 }
